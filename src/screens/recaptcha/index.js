@@ -26,12 +26,12 @@ function Recaptcha({navigateProps}) {
 
   const handleInputChange = () => {
     setIsPassed(prevState => !prevState)
-  }
 
-  forwardMessageToMainAppFromPopup({
-    enablePrimaryButton: isPassed,
-    screen: 'recaptchaScreen',
-  })
+    forwardMessageToMainAppFromPopup({
+      enablePrimaryButton: isPassed,
+      screen: 'recaptchaScreen',
+    })
+  }
 
   return (
     <Div>
