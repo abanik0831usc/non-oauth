@@ -25,7 +25,7 @@ function MFA({navigateProps}) {
 
     setNavigate(false)
     navigate === 'forward' && btnRef.current.click()
-    navigate === 'back' && history.goBack()
+    navigate === 'back' && history.push('/')
   }, [navigate, setNavigate])
 
   const [mfa, setMfa] = useState('')
