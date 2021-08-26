@@ -25,9 +25,26 @@ function App() {
 
   const navigateProps = [navigate, setNavigate]
 
+  const color = (type) => {
+    switch (type) {
+      case 'sbg2':
+        return 'rgb(44, 160, 28)'
+      case 'mint':
+        return '#32d9f2'
+      case 'ctg':
+        return '#037c8f'
+      case 'intuit':
+        return 'linear-gradient(to bottom, #3e6cc9 0%, #2e50b6 100%)'
+      case 'ck':
+        return '#008600'
+      default:
+        return 'teal'
+    }
+  }
+
   return (
       <Router>
-        <div style={{ background: 'teal' }}>
+        <div style={{ background: color() }}>
 
           {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
