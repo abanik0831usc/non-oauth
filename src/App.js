@@ -24,6 +24,8 @@ function App() {
     return () => removeIframeEventListener()
   }, [])
 
+  const props = [navigate, setNavigate]
+
   return (
       <Router>
         <div>
@@ -44,7 +46,7 @@ function App() {
               <Success />
             </Route>
             <Route path="/">
-              <AuthScreen />
+              <AuthScreen {...props} />
             </Route>
           </Switch>
         </div>
