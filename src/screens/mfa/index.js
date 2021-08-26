@@ -12,7 +12,7 @@ function MFA({navigateProps}) {
   const history = useHistory()
 
   const handleClick = () => {
-    history.push('/connecting')
+    history.push('/connecting?mfa=true')
   }
 
   const btnRef = useRef(null)

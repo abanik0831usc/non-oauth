@@ -1,6 +1,6 @@
 import React, {Component, useEffect} from 'react'
 import styled from "styled-components";
-import {Link, useHistory} from "react-router-dom";
+import {Link, useHistory, useLocation} from "react-router-dom";
 import {forwardMessageToMainAppFromPopup} from "../../utils/iframe";
 
 const Div = styled.div`
@@ -15,8 +15,14 @@ const sleep = () => {
   })
 }
 
+function useQuery() {
+  return new URLSearchParams(useLocation().search)
+}
+
+
 function Connecting() {
   const history = useHistory()
+  const query = useQuery()
 
   useEffect(() => {
     forwardMessageToMainAppFromPopup({
@@ -26,12 +32,13 @@ function Connecting() {
 
     const invoke = async () => {
       await sleep()
-
-      // history.push('/success')
-
-      forwardMessageToMainAppFromPopup({
-        responseToken: '1234567890',
-      })
+      if (!query.get('mfa')) {
+        history.push('/mfa')
+      } else {
+        forwardMessageToMainAppFromPopup({
+          responseToken: '1234567890',
+        })
+      }
     }
 
     invoke()

@@ -12,7 +12,7 @@ function Recaptcha({navigateProps}) {
   const history = useHistory()
 
   const handleClick = () => {
-    history.push('/mfa')
+    history.push('/connecting')
   }
 
   const btnRef = useRef(null)
