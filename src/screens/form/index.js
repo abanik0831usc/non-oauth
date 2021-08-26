@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import styled from "styled-components";
 import {Link} from "react-router-dom";
 import {forwardMessageToMainAppFromPopup} from "../../utils/iframe";
+import { useHistory } from "react-router-dom";
 
 const Div = styled.div`
   padding: 20px;
@@ -36,6 +37,21 @@ function AuthScreen() {
         })
     }
 
+    const history = useHistory()
+    const handleClick = () => {
+        history.push('/recaptcha')
+    }
+
+    const btnRef = useRef(null)
+
+    const [navigate, setNavigate] = useState(false)
+
+    useEffect(() => {
+        console.log(btnRef.current)
+        setNavigate(false)
+        navigate && btnRef.current.click()
+    }, [navigate])
+
     return (
         <Div>
             <form>
@@ -47,11 +63,9 @@ function AuthScreen() {
                 <input onChange={handlePasswordChange} value={password} type="password" />
             </form>
 
-            <Link to="/recaptcha">
-                <button style={{ marginTop: '20px'}} type="button">
-                    Continue
-                </button>
-            </Link>
+            <button ref={btnRef} style={{ marginTop: '20px'}} type="button" onClick={handleClick}>
+                Continue
+            </button>
         </Div>
     );
 }

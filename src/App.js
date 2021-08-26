@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -12,8 +12,17 @@ import Recaptcha from "./screens/recaptcha";
 import MFA from "./screens/mfa";
 import Connecting from "./screens/connecting";
 import Success from "./screens/success";
+import {receiveMessageFromMainAppToPopup, removeIframeEventListener} from "./utils/iframe";
 
 function App() {
+  const [navigate, setNavigate] = useState(false)
+
+  useEffect(() => {
+    receiveMessageFromMainAppToPopup(setNavigate)
+
+    return () => removeIframeEventListener()
+  }, [])
+
   return (
       <Router>
         <div>
