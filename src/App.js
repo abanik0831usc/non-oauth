@@ -20,11 +20,10 @@ function App() {
   useEffect(() => {
     console.log('ok this is called..')
     receiveMessageFromMainAppToPopup(setNavigate)
-    console.log('navigate :', navigate)
     return () => removeIframeEventListener()
   }, [])
 
-  const props = [navigate, setNavigate]
+  const navigateProps = [navigate, setNavigate]
 
   return (
       <Router>
@@ -34,19 +33,19 @@ function App() {
             renders the first one that matches the current URL. */}
           <Switch>
             <Route path="/recaptcha">
-              <Recaptcha />
+              <Recaptcha navigateProps={navigateProps} />
             </Route>
             <Route path="/mfa">
-              <MFA />
+              <MFA navigateProps={navigateProps} />
             </Route>
             <Route path="/connecting">
-              <Connecting />
+              <Connecting navigateProps={navigateProps} />
             </Route>
             <Route path="/success">
-              <Success />
+              <Success navigateProps={navigateProps} />
             </Route>
             <Route path="/">
-              <AuthScreen props={props} />
+              <AuthScreen navigateProps={navigateProps} />
             </Route>
           </Switch>
         </div>

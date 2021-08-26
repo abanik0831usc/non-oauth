@@ -8,10 +8,9 @@ const Div = styled.div`
   padding: 20px;
 `
 
-function AuthScreen({props}) {
+function AuthScreen({navigateProps}) {
 
-    console.log('props: ', props)
-    const [navigate, setNavigate] = props
+    const [navigate, setNavigate] = navigateProps
     const [btnsEnabled, setBtnsEnabled] = useState(false)
 
     const [username, setUsername] = useState('')
@@ -47,8 +46,6 @@ function AuthScreen({props}) {
     const btnRef = useRef(null)
 
     useEffect(() => {
-        console.log('soo... not coming here?')
-        console.log(btnRef.current)
         setNavigate(false)
         navigate && btnRef.current.click()
     }, [navigate, setNavigate])

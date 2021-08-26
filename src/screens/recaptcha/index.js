@@ -1,25 +1,35 @@
-import React, { Component } from 'react'
+import React, { useEffect, useRef } from 'react'
 import styled from "styled-components";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 
 const Div = styled.div`
   padding: 20px;
 `
 
-class Recaptcha extends Component {
-    render() {
-        return (
-            <Div>
-                <label><p>Recaptcha Screen</p></label>
+function Recaptcha({navigateProps}) {
+  const [navigate, setNavigate] = navigateProps
+  const history = useHistory()
 
-                <Link to="/mfa">
-                    <button style={{ marginTop: '20px'}} type="button">
-                        Continue
-                    </button>
-                </Link>
-            </Div>
-        );
-    }
+  const handleClick = () => {
+    history.push('/mfa')
+  }
+
+  const btnRef = useRef(null)
+
+  useEffect(() => {
+    setNavigate(false)
+    navigate && btnRef.current.click()
+  }, [navigate, setNavigate])
+
+  return (
+    <Div>
+      <label><p>Recaptcha Screen</p></label>
+
+      <button style={{ marginTop: '20px'}} type="button" onClick={handleClick}>
+        Continue
+      </button>
+    </Div>
+  );
 }
 
 export default Recaptcha
