@@ -26,6 +26,7 @@ function App() {
   const navigateProps = [navigate, setNavigate]
 
   const color = (type) => {
+    console.log('theme inside color: ', theme)
     switch (type) {
       case 'sbg2':
         return 'rgb(44, 160, 28)'
@@ -44,7 +45,7 @@ function App() {
 
   return (
       <Router>
-        <div style={{ background: color() }}>
+        <div style={{ background: color(theme) }}>
 
           {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
