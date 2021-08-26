@@ -39,6 +39,7 @@ export const forwardMessageToMainAppFromPopup = (idxMessage) => {
 }
 
 export const receiveMessageFromMainAppToPopup = (setState) => {
+    console.log('helllooooo....')
     const eventMethod = window.addEventListener
       ? 'addEventListener'
       : 'attachEvent'
