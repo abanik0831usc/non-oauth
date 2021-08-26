@@ -1,6 +1,7 @@
 import React, {Component, useEffect} from 'react'
 import styled from "styled-components";
 import {Link, useHistory} from "react-router-dom";
+import {forwardMessageToMainAppFromPopup} from "../../utils/iframe";
 
 const Div = styled.div`
   padding: 20px;
@@ -18,10 +19,19 @@ function Connecting() {
   const history = useHistory()
 
   useEffect(() => {
+    forwardMessageToMainAppFromPopup({
+      isConnectingScreen: true,
+      screen: 'connectingScreen',
+    })
+
     const invoke = async () => {
       await sleep()
 
-      history.push('/success')
+      // history.push('/success')
+
+      forwardMessageToMainAppFromPopup({
+        responseToken: '1234567890',
+      })
     }
 
     invoke()

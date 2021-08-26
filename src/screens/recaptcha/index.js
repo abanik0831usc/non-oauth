@@ -19,7 +19,6 @@ function Recaptcha({navigateProps}) {
 
   useEffect(() => {
     setNavigate(false)
-    console.log('whats navigate: ', navigate)
     navigate && btnRef.current.click()
   }, [navigate, setNavigate])
 
