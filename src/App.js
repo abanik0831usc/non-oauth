@@ -16,9 +16,10 @@ import {receiveMessageFromMainAppToPopup, removeIframeEventListener} from "./uti
 
 function App() {
   const [navigate, setNavigate] = useState(false)
+  const [theme, setTheme] = useState('')
 
   useEffect(() => {
-    receiveMessageFromMainAppToPopup(setNavigate)
+    receiveMessageFromMainAppToPopup(setNavigate, setTheme)
     return () => removeIframeEventListener()
   }, [])
 
@@ -26,7 +27,7 @@ function App() {
 
   return (
       <Router>
-        <div>
+        <div style={{ background: 'teal' }}>
 
           {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}

@@ -38,7 +38,7 @@ export const forwardMessageToMainAppFromPopup = (idxMessage) => {
     window.parent.postMessage({ idxMessage }, '*')
 }
 
-export const receiveMessageFromMainAppToPopup = (setState) => {
+export const receiveMessageFromMainAppToPopup = (setState, setTheme) => {
     const eventMethod = window.addEventListener
       ? 'addEventListener'
       : 'attachEvent'
@@ -57,7 +57,7 @@ export const receiveMessageFromMainAppToPopup = (setState) => {
     // Listen to message from intuit-fdp-auth-redirect-client
     event(
       messageEvent,
-      (e) => handlePostMessage(e, setState),
+      (e) => handlePostMessage(e, setState, setTheme),
       false
     )
 }
@@ -74,10 +74,13 @@ export function removeIframeEventListener() {
     event(messageEvent, handlePostMessage, false)
 }
 
-const handlePostMessage = (e, setState) => {
+const handlePostMessage = (e, setState, setTheme) => {
     if (e.data.idxMessage && e.origin !== 'http://localhost:3000') {
         const data = JSON.parse(e.data.idxMessage)
         console.log('get the data: ', data)
-        setState(true)
+        data.navigate && setState(true)
+
+        console.log('data theme: ', data.theme)
+        data.theme && setTheme(data.theme)
     }
 }
