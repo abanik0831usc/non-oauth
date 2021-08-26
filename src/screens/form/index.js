@@ -8,8 +8,9 @@ const Div = styled.div`
   padding: 20px;
 `
 
-function AuthScreen(props) {
+function AuthScreen({props}) {
 
+    console.log('props: ', props)
     const [navigate, setNavigate] = props
     const [btnsEnabled, setBtnsEnabled] = useState(false)
 

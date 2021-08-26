@@ -46,7 +46,7 @@ function App() {
               <Success />
             </Route>
             <Route path="/">
-              <AuthScreen {...props} />
+              <AuthScreen props={props} />
             </Route>
           </Switch>
         </div>
