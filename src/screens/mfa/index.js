@@ -18,6 +18,11 @@ function MFA({navigateProps}) {
   const btnRef = useRef(null)
 
   useEffect(() => {
+    forwardMessageToMainAppFromPopup({
+      isConnectingScreen: false,
+      screen: 'mfaScreen',
+    })
+
     setNavigate(false)
     navigate === 'forward' && btnRef.current.click()
     navigate === 'back' && history.goBack()
