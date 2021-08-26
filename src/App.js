@@ -18,7 +18,6 @@ function App() {
   const [navigate, setNavigate] = useState(false)
 
   useEffect(() => {
-    console.log('ok this is called..')
     receiveMessageFromMainAppToPopup(setNavigate)
     return () => removeIframeEventListener()
   }, [])

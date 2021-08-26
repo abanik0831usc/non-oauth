@@ -19,6 +19,7 @@ function Recaptcha({navigateProps}) {
 
   useEffect(() => {
     setNavigate(false)
+    console.log('whats navigate: ', navigate)
     navigate && btnRef.current.click()
   }, [navigate, setNavigate])
 
@@ -44,7 +45,7 @@ function Recaptcha({navigateProps}) {
           checked={isPassed}
           onChange={handleInputChange} />
       </label>
-      <button style={{ marginTop: '20px'}} type="button" onClick={handleClick}>
+      <button ref={btnRef} style={{ marginTop: '20px'}} type="button" onClick={handleClick}>
         Continue
       </button>
     </Div>

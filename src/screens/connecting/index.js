@@ -24,8 +24,8 @@ function Connecting() {
       history.push('/success')
     }
 
-    await invoke()
-  }, [])
+    invoke()
+  }, [history])
   return (
     <Div>
       <label><p>Connecting...</p></label>

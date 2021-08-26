@@ -29,7 +29,7 @@ function MFA({navigateProps}) {
         <input type="text" />
       </form>
 
-      <button style={{ marginTop: '20px'}} type="button" onClick={handleClick}>
+      <button ref={btnRef} style={{ marginTop: '20px'}} type="button" onClick={handleClick}>
         Connect
       </button>
     </Div>

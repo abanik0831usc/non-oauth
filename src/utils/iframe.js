@@ -39,7 +39,6 @@ export const forwardMessageToMainAppFromPopup = (idxMessage) => {
 }
 
 export const receiveMessageFromMainAppToPopup = (setState) => {
-    console.log('helllooooo....')
     const eventMethod = window.addEventListener
       ? 'addEventListener'
       : 'attachEvent'
@@ -76,8 +75,7 @@ export function removeIframeEventListener() {
 }
 
 const handlePostMessage = (e, setState) => {
-    console.log('what is data: ', e.data)
-    if (e.data.idxMessage) {
+    if (e.data.idxMessage && e.origin !== 'http://localhost:3000') {
         const data = JSON.parse(e.data.idxMessage)
         console.log('get the data: ', data)
         setState(true)
