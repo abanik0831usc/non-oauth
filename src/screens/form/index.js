@@ -47,8 +47,8 @@ function AuthScreen({navigateProps}) {
     const btnRef = useRef(null)
 
     useEffect(() => {
-        setNavigate(false)
-        navigate && btnRef.current.click()
+        setNavigate('')
+        navigate === 'forward' && btnRef.current.click()
     }, [navigate, setNavigate])
 
     return (

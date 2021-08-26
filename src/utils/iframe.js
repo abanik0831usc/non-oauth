@@ -77,10 +77,7 @@ export function removeIframeEventListener() {
 const handlePostMessage = (e, setState, setTheme) => {
     if (e.data.idxMessage && e.origin !== 'http://localhost:3000') {
         const data = JSON.parse(e.data.idxMessage)
-        console.log('get the data: ', data)
-        data.navigate && setState(true)
-
-        console.log('data theme: ', data.theme)
+        data.navigate && setState(data.navigate)
         data.theme && setTheme(data.theme)
     }
 }

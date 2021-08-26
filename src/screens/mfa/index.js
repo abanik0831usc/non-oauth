@@ -19,7 +19,8 @@ function MFA({navigateProps}) {
 
   useEffect(() => {
     setNavigate(false)
-    navigate && btnRef.current.click()
+    navigate === 'forward' && btnRef.current.click()
+    navigate === 'back' && history.goBack()
   }, [navigate, setNavigate])
 
   const [mfa, setMfa] = useState('')

@@ -15,7 +15,7 @@ import Success from "./screens/success";
 import {receiveMessageFromMainAppToPopup, removeIframeEventListener} from "./utils/iframe";
 
 function App() {
-  const [navigate, setNavigate] = useState(false)
+  const [navigate, setNavigate] = useState('')
   const [theme, setTheme] = useState('')
 
   useEffect(() => {
@@ -26,7 +26,6 @@ function App() {
   const navigateProps = [navigate, setNavigate]
 
   const color = (type) => {
-    console.log('theme inside color: ', theme)
     switch (type) {
       case 'sbg2':
         return 'rgb(44, 160, 28)'
