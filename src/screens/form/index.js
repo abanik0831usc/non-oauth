@@ -58,7 +58,7 @@ function AuthScreen({navigateProps, shouldShowMFA, shouldShowError, handleErrorC
 
         console.log('contentRef.current.clientHeight: ', contentRef.current.clientHeight)
         const message = {
-            height: `${clientHeight}px`,
+            height: clientHeight > 352 ? '352px' : `${clientHeight}px`,
             width: '352px',
             screen: 'auth',
         }
