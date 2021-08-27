@@ -63,6 +63,7 @@ function App() {
       clientHeight = 352
     }
 
+    console.log('okkk: ', `{"height":"${clientHeight + 100}px", "width": "352px"}`)
     window.parent.postMessage(
       `{"height":"${clientHeight + 100}px", "width": "352px"}`,
       '*',
