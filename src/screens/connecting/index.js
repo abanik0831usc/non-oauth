@@ -27,7 +27,7 @@ function Connecting({shouldShowMFA, shouldShowError}) {
   useEffect(() => {
     forwardMessageToMainAppFromPopup({
       isConnectingScreen: true,
-      screen: 'connectingScreen',
+      screen: 'connecting',
     })
 
     console.log('shouldShowMFA: ', shouldShowMFA)

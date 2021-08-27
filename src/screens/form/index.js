@@ -28,13 +28,13 @@ function AuthScreen({navigateProps, shouldShowMFA, shouldShowError, handleErrorC
         setBtnsEnabled(true)
         forwardMessageToMainAppFromPopup({
             enablePrimaryButton: true,
-            screen: 'authScreen',
+            screen: 'auth',
         })
     } else if ((!username || !password) && btnsEnabled) {
         setBtnsEnabled(false)
         forwardMessageToMainAppFromPopup({
             enablePrimaryButton: false,
-            screen: 'authScreen',
+            screen: 'auth',
         })
     }
 

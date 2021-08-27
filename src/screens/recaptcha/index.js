@@ -33,7 +33,7 @@ function Recaptcha({navigateProps}) {
   useEffect(() => {
     forwardMessageToMainAppFromPopup({
       enablePrimaryButton: isPassed,
-      screen: 'recaptchaScreen',
+      screen: 'recaptcha',
     })
   }, [isPassed])
 

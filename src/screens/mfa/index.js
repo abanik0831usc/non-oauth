@@ -20,7 +20,7 @@ function MFA({navigateProps}) {
   useEffect(() => {
     forwardMessageToMainAppFromPopup({
       isConnectingScreen: false,
-      screen: 'mfaScreen',
+      screen: 'mfa',
     })
 
     setNavigate(false)
@@ -40,13 +40,13 @@ function MFA({navigateProps}) {
     setBtnsEnabled(true)
     forwardMessageToMainAppFromPopup({
       enablePrimaryButton: true,
-      screen: 'mfaScreen',
+      screen: 'mfa',
     })
   } else if (!mfa && btnsEnabled) {
     setBtnsEnabled(false)
     forwardMessageToMainAppFromPopup({
       enablePrimaryButton: false,
-      screen: 'mfaScreen',
+      screen: 'mfa',
     })
   }
 
