@@ -66,10 +66,11 @@ function App() {
     if (!clientHeight || clientHeight < 352) {
       clientHeight = 352
     }
-
-    console.log('okkk: ', `{"height":"${clientHeight + 100}px", "width": "352px"}`)
-
-    const message = `{"height":"${clientHeight + 100}px", "width": "352px"}`
+    
+    const message = {
+      height: `${clientHeight + 100}px`,
+      width: '352px',
+    }
     forwardMessageToMainAppFromPopup(message)
   }, [])
 
