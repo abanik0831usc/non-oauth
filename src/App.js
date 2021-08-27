@@ -13,7 +13,11 @@ import MFA from "./screens/mfa";
 import Connecting from "./screens/connecting";
 import Success from "./screens/success";
 import Error from "./screens/error";
-import {receiveMessageFromMainAppToPopup, removeIframeEventListener} from "./utils/iframe";
+import {
+  forwardMessageToMainAppFromPopup,
+  receiveMessageFromMainAppToPopup,
+  removeIframeEventListener
+} from "./utils/iframe";
 
 function App() {
   const [navigate, setNavigate] = useState('')
@@ -65,10 +69,8 @@ function App() {
 
     console.log('okkk: ', `{"height":"${clientHeight + 100}px", "width": "352px"}`)
 
-    window.parent.postMessage(
-      { idxMessage: `{"height":"${clientHeight + 100}px", "width": "352px"}` },
-      '*',
-    )
+    const message = `{"height":"${clientHeight + 100}px", "width": "352px"}`
+    forwardMessageToMainAppFromPopup(message)
   }, [])
 
   return (
