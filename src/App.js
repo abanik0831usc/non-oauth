@@ -65,7 +65,7 @@ function App() {
 
     console.log('okkk: ', `{"height":"${clientHeight + 100}px", "width": "352px"}`)
     window.parent.postMessage(
-      `{"height":"${clientHeight + 100}px", "width": "352px"}`,
+      { idxMessage: `{"height":"${clientHeight + 100}px", "width": "352px"}` },
       '*',
     )
   }, [])
