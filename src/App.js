@@ -66,9 +66,9 @@ function App() {
     if (!clientHeight || clientHeight < 352) {
       clientHeight = 352
     }
-    
+
     const message = {
-      height: `${clientHeight + 100}px`,
+      height: `${clientHeight}px`,
       width: '352px',
     }
     forwardMessageToMainAppFromPopup(message)
