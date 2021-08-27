@@ -83,21 +83,7 @@ function App() {
               <Error navigateProps={navigateProps} />
             </Route>
             <Route path="/">
-              <label>Enable MFA:</label>
-              <input
-                name="recaptcha"
-                type="checkbox"
-                checked={isMFAEnabled}
-                onChange={handleMFAChange} />
-              <br/>
-
-              <label>Enable Error:</label>
-              <input
-                name="recaptcha"
-                type="checkbox"
-                checked={isErrorEnabled}
-                onChange={handleErrorChange} />
-              <AuthScreen navigateProps={navigateProps} />
+              <AuthScreen navigateProps={navigateProps} handleMFAChange={handleMFAChange} handleErrorChange={handleErrorChange} shouldShowMFA={isMFAEnabled} shouldShowError={isErrorEnabled} />
             </Route>
           </Switch>
         </div>

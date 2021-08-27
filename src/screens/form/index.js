@@ -8,7 +8,7 @@ const Div = styled.div`
   padding: 20px;
 `
 
-function AuthScreen({navigateProps}) {
+function AuthScreen({navigateProps, shouldShowMFA, shouldShowError, handleErrorChange, handleMFAChange}) {
 
     const [navigate, setNavigate] = navigateProps
     const [btnsEnabled, setBtnsEnabled] = useState(false)
@@ -67,6 +67,20 @@ function AuthScreen({navigateProps}) {
 
     return (
         <Div ref={contentRef}>
+            <label>Enable MFA:</label>
+            <input
+              name="recaptcha"
+              type="checkbox"
+              checked={shouldShowMFA}
+              onChange={handleMFAChange} />
+            <br/>
+
+            <label>Enable Error:</label>
+            <input
+              name="recaptcha"
+              type="checkbox"
+              checked={shouldShowError}
+              onChange={handleErrorChange} />
             <form>
                 <h1>Login to Bank</h1>
                 <p>Enter your username:</p>
