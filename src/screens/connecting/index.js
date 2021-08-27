@@ -25,13 +25,14 @@ function Connecting({shouldShowMFA, shouldShowError}) {
   const query = useQuery()
 
   useEffect(() => {
+    let clientHeight = contentRef && contentRef.current && contentRef.current.clientHeight
     forwardMessageToMainAppFromPopup({
+      height: `${clientHeight}px`,
+      width: '352px',
       isConnectingScreen: true,
       screen: 'connecting',
     })
 
-    console.log('shouldShowMFA: ', shouldShowMFA)
-    console.log('shouldShowError: ', shouldShowError)
     const invoke = async () => {
       await sleep()
 
@@ -49,20 +50,7 @@ function Connecting({shouldShowMFA, shouldShowError}) {
   }, [history])
 
   const contentRef = useRef(null)
-
-  useEffect(() => {
-    let clientHeight = contentRef && contentRef.current && contentRef.current.clientHeight
-
-    const message = {
-      height: `${clientHeight}px`,
-      width: '352px',
-      screen: 'connecting',
-    }
-
-    console.log('what is message: ', message)
-    forwardMessageToMainAppFromPopup(message)
-  }, [])
-
+  
   return (
     <Div ref={contentRef}>
       <label><p>Connecting...</p></label>
