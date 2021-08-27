@@ -20,7 +20,7 @@ function useQuery() {
 }
 
 
-function Connecting({shouldShowMFA, shouldShowError}) {
+function Connecting({shouldShowMFA, shouldShowError, handleErrorChange, handleMFAChange}) {
   const history = useHistory()
   const query = useQuery()
 
@@ -36,8 +36,8 @@ function Connecting({shouldShowMFA, shouldShowError}) {
     const invoke = async () => {
       await sleep()
 
-      shouldShowMFA && history.push('/mfa')
-      shouldShowError && history.push('/error')
+      shouldShowMFA && handleMFAChange() && history.push('/mfa')
+      shouldShowError && handleErrorChange() && history.push('/error')
 
       if (!shouldShowMFA && !shouldShowError) {
         forwardMessageToMainAppFromPopup({

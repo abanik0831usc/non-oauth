@@ -74,7 +74,7 @@ function App() {
               <MFA navigateProps={navigateProps} />
             </Route>
             <Route path="/connecting">
-              <Connecting navigateProps={navigateProps} shouldShowMFA={isMFAEnabled} shouldShowError={isErrorEnabled} />
+              <Connecting navigateProps={navigateProps} handleMFAChange={handleMFAChange} handleErrorChange={handleErrorChange} shouldShowMFA={isMFAEnabled} shouldShowError={isErrorEnabled} />
             </Route>
             <Route path="/success">
               <Success navigateProps={navigateProps} />
