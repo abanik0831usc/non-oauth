@@ -50,7 +50,7 @@ function Connecting({shouldShowMFA, shouldShowError}) {
   }, [history])
 
   const contentRef = useRef(null)
-  
+
   return (
     <Div ref={contentRef}>
       <label><p>Connecting...</p></label>
