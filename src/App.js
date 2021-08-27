@@ -14,7 +14,6 @@ import Connecting from "./screens/connecting";
 import Success from "./screens/success";
 import Error from "./screens/error";
 import {
-  forwardMessageToMainAppFromPopup,
   receiveMessageFromMainAppToPopup,
   removeIframeEventListener
 } from "./utils/iframe";
