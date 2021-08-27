@@ -82,7 +82,6 @@ function AuthScreen({navigateProps, shouldShowMFA, shouldShowError, handleErrorC
               checked={shouldShowError}
               onChange={handleErrorChange} />
             <form>
-                <h1>Login to Bank</h1>
                 <p>Enter your username:</p>
                 <input onChange={handleUsernameChange} value={username} type="text" />
 
