@@ -12,6 +12,7 @@ import Recaptcha from "./screens/recaptcha";
 import MFA from "./screens/mfa";
 import Connecting from "./screens/connecting";
 import Success from "./screens/success";
+import Error from "./screens/error";
 import {receiveMessageFromMainAppToPopup, removeIframeEventListener} from "./utils/iframe";
 
 function App() {
@@ -42,6 +43,17 @@ function App() {
     }
   }
 
+  const [isErrorEnabled, setIsErrorEnabled] = useState(false)
+  const [isMFAEnabled, setIsMFAEnabled] = useState(false)
+
+  const handleErrorChange = () => {
+    setIsErrorEnabled(prevState => !prevState)
+  }
+
+  const handleMFAChange = () => {
+    setIsMFAEnabled(prevState => !prevState)
+  }
+
   return (
       <Router>
         <div style={{ background: color(theme) }}>
@@ -56,12 +68,29 @@ function App() {
               <MFA navigateProps={navigateProps} />
             </Route>
             <Route path="/connecting">
-              <Connecting navigateProps={navigateProps} />
+              <Connecting navigateProps={navigateProps} shouldShowMFA={isMFAEnabled} shouldShowError={isErrorEnabled} />
             </Route>
             <Route path="/success">
               <Success navigateProps={navigateProps} />
             </Route>
+            <Route path="/error">
+              <Error navigateProps={navigateProps} />
+            </Route>
             <Route path="/">
+              <label>Enable MFA:</label>
+              <input
+                name="recaptcha"
+                type="checkbox"
+                checked={isMFAEnabled}
+                onChange={handleMFAChange} />
+              <br/>
+
+              <label>Enable Error:</label>
+              <input
+                name="recaptcha"
+                type="checkbox"
+                checked={isErrorEnabled}
+                onChange={handleErrorChange} />
               <AuthScreen navigateProps={navigateProps} />
             </Route>
           </Switch>
