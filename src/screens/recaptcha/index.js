@@ -45,6 +45,7 @@ function Recaptcha({navigateProps}) {
     const message = {
       height: `${clientHeight}px`,
       width: '352px',
+      screen: 'recaptcha',
     }
 
     console.log('what is message: ', message)

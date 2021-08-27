@@ -58,6 +58,7 @@ function MFA({navigateProps}) {
     const message = {
       height: `${clientHeight}px`,
       width: '352px',
+      screen: 'mfa',
     }
 
     forwardMessageToMainAppFromPopup(message)

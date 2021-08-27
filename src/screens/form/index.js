@@ -59,9 +59,9 @@ function AuthScreen({navigateProps, shouldShowMFA, shouldShowError, handleErrorC
         const message = {
             height: `${clientHeight}px`,
             width: '352px',
+            screen: 'auth',
         }
 
-        console.log('what is message: ', message)
         forwardMessageToMainAppFromPopup(message)
     }, [])
 
