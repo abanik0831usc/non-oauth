@@ -23,7 +23,7 @@ function Recaptcha({navigateProps}) {
     navigate === 'back' && history.goBack()
   }, [navigate, setNavigate])
 
-  const [isPassed, setIsPassed] = useState()
+  const [isPassed, setIsPassed] = useState(false)
 
   const handleInputChange = () => {
     setIsPassed(prevState => !prevState)
