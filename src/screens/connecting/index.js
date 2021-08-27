@@ -1,4 +1,4 @@
-import React, {Component, useEffect} from 'react'
+import React, {Component, useEffect, useRef} from 'react'
 import styled from "styled-components";
 import {Link, useHistory, useLocation} from "react-router-dom";
 import {forwardMessageToMainAppFromPopup} from "../../utils/iframe";
@@ -47,8 +47,26 @@ function Connecting({shouldShowMFA, shouldShowError}) {
 
     invoke()
   }, [history])
+
+  const contentRef = useRef(null)
+
+  useEffect(() => {
+    let clientHeight = contentRef && contentRef.current && contentRef.current.clientHeight
+
+    if (!clientHeight || clientHeight < 352) {
+      clientHeight = 352
+    }
+    const message = {
+      height: `${clientHeight}px`,
+      width: '352px',
+    }
+
+    console.log('what is message: ', message)
+    forwardMessageToMainAppFromPopup(message)
+  }, [])
+
   return (
-    <Div>
+    <Div ref={contentRef}>
       <label><p>Connecting...</p></label>
 
       <Link to="/success">

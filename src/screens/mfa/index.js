@@ -50,8 +50,24 @@ function MFA({navigateProps}) {
     })
   }
 
+  const contentRef = useRef(null)
+
+  useEffect(() => {
+    let clientHeight = contentRef && contentRef.current && contentRef.current.clientHeight
+
+    if (!clientHeight || clientHeight < 352) {
+      clientHeight = 352
+    }
+    const message = {
+      height: `${clientHeight}px`,
+      width: '352px',
+    }
+
+    forwardMessageToMainAppFromPopup(message)
+  }, [])
+
   return (
-    <Div>
+    <Div ref={contentRef}>
       <form>
         <h1>MFA answer</h1>
         <p>text:</p>
