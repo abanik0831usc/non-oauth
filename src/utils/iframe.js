@@ -31,8 +31,6 @@ export function addiframeEventListener() {
 }
 
 export const forwardMessageToMainAppFromPopup = (idxMessage) => {
-    console.log(idxMessage)
-    console.log(typeof idxMessage)
     if (typeof message !== 'string') {
         idxMessage = JSON.stringify(idxMessage);
     }

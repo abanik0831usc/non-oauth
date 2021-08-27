@@ -19,7 +19,6 @@ function Recaptcha({navigateProps}) {
 
   useEffect(() => {
     setNavigate(false)
-    console.log('what is navigate:: ', navigate)
     navigate === 'forward' && btnRef.current.click()
     navigate === 'back' && history.goBack()
   }, [navigate, setNavigate])
@@ -48,7 +47,6 @@ function Recaptcha({navigateProps}) {
       screen: 'recaptcha',
     }
 
-    console.log('what is message: ', message)
     forwardMessageToMainAppFromPopup(message)
   }, [])
 

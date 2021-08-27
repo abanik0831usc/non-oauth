@@ -46,8 +46,6 @@ function Recaptcha({navigateProps}) {
 			width: '352px',
 			screen: 'error',
 		}
-
-		console.log('what is message: ', message)
 		forwardMessageToMainAppFromPopup(message)
 	}, [])
 
