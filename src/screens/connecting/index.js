@@ -36,8 +36,15 @@ function Connecting({shouldShowMFA, shouldShowError, handleErrorChange, handleMF
     const invoke = async () => {
       await sleep()
 
-      shouldShowMFA && handleMFAChange() && history.push('/mfa')
-      shouldShowError && handleErrorChange() && history.push('/error')
+      if (shouldShowMFA) {
+        handleMFAChange()
+        history.push('/mfa')
+      }
+
+      if (shouldShowError) {
+        handleErrorChange()
+        history.push('/error')
+      }
 
       if (!shouldShowMFA && !shouldShowError) {
         forwardMessageToMainAppFromPopup({
