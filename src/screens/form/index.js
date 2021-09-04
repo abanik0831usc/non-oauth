@@ -9,7 +9,7 @@ import Header from "../Header";
 import { ContainerInput, ContainerLabel, Checkmark } from '../checkboxStyle'
 
 const Div = styled.div`
-  padding: 20px;
+  padding: 0;
 `
 
 const Input = styled.input`

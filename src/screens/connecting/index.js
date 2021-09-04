@@ -4,7 +4,7 @@ import {Link, useHistory, useLocation} from "react-router-dom";
 import {forwardMessageToMainAppFromPopup} from "../../utils/iframe";
 import './loader.css'
 const Div = styled.div`
-  padding: 20px;
+  padding: 0;
 `
 
 const sleep = () => {

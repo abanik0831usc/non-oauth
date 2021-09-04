@@ -6,7 +6,7 @@ import Header from "../Header";
 import Footer from "../footer";
 
 const Div = styled.div`
-  padding: 20px;
+  padding: 0;
 `
 const Input = styled.input`
     padding: 12px 20px;

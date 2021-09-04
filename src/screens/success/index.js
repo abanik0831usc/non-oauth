@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {Link} from "react-router-dom";
 
 const Div = styled.div`
-  padding: 20px;
+  padding: 0;
 `
 
 class Success extends Component {

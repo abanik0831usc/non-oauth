@@ -6,7 +6,7 @@ import Header from "../Header";
 import Footer from "../footer";
 
 const Div = styled.div`
-  padding: 20px;
+  padding: 0;
 `
 
 function Recaptcha({navigateProps, shouldDisplayFooter = true, shouldDisplayHeader = false, background, fontColor }) {
