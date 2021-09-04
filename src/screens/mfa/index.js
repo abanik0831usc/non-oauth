@@ -69,10 +69,11 @@ function MFA({navigateProps, background, fontColor, shouldDisplayFooter = true, 
 
   useEffect(() => {
     let clientHeight = contentRef && contentRef.current && contentRef.current.clientHeight
+    let clientWidth = contentRef && contentRef.current && contentRef.current.clientWidth
 
     const message = {
       height: `${clientHeight}px`,
-      width: '352px',
+      width: clientWidth > 902 ? '902px' : `${clientWidth}px`,
       code: '185',
       description: 'additional authentication details required',
       otherDetails: 'share all other error reasons',

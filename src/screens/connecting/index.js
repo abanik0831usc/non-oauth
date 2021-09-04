@@ -27,9 +27,11 @@ function Connecting({shouldShowMFA, shouldShowError, handleErrorChange, handleMF
   const [isFetching, setIsFetching] = useState(true)
   useEffect(() => {
     let clientHeight = contentRef && contentRef.current && contentRef.current.clientHeight
+    let clientWidth = contentRef && contentRef.current && contentRef.current.clientWidth
+
     forwardMessageToMainAppFromPopup({
       height: `${clientHeight}px`,
-      width: '352px',
+      width: clientWidth > 902 ? '902px' : `${clientWidth}px`,
       isConnectingScreen: true,
       currentScreen: 'connecting',
     })

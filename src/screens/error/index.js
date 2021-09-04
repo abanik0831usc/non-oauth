@@ -22,10 +22,11 @@ function Recaptcha({navigateProps, shouldDisplayFooter = true, shouldDisplayHead
 
 	useEffect(() => {
 		let clientHeight = contentRef && contentRef.current && contentRef.current.clientHeight
+		let clientWidth = contentRef && contentRef.current && contentRef.current.clientWidth
 
 		const message = {
 			height: `${clientHeight}px`,
-			width: '352px',
+			width: clientWidth > 902 ? '902px' : `${clientWidth}px`,
 			currentScreen: 'error',
 			enablePrimaryButton: true,
 			code: '103',
