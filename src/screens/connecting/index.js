@@ -1,8 +1,8 @@
-import React, {Component, useEffect, useRef} from 'react'
+import React, {Component, useEffect, useRef, useState} from 'react'
 import styled from "styled-components";
 import {Link, useHistory, useLocation} from "react-router-dom";
 import {forwardMessageToMainAppFromPopup} from "../../utils/iframe";
-
+import './loader.css'
 const Div = styled.div`
   padding: 20px;
 `
@@ -20,22 +20,24 @@ function useQuery() {
 }
 
 
-function Connecting({shouldShowMFA, shouldShowError, handleErrorChange, handleMFAChange}) {
+function Connecting({shouldShowMFA, shouldShowError, handleErrorChange, handleMFAChange, shouldDisplayHeader = false, shouldDisplayFooter = true, background, fontColor }) {
   const history = useHistory()
   const query = useQuery()
 
+  const [isFetching, setIsFetching] = useState(true)
   useEffect(() => {
     let clientHeight = contentRef && contentRef.current && contentRef.current.clientHeight
     forwardMessageToMainAppFromPopup({
       height: `${clientHeight}px`,
       width: '352px',
       isConnectingScreen: true,
-      screen: 'connecting',
+      currentScreen: 'connecting',
     })
 
     const invoke = async () => {
       await sleep()
 
+      setIsFetching(false)
       if (shouldShowMFA) {
         handleMFAChange()
         history.push('/mfa')
@@ -49,7 +51,7 @@ function Connecting({shouldShowMFA, shouldShowError, handleErrorChange, handleMF
       if (!shouldShowMFA && !shouldShowError) {
         forwardMessageToMainAppFromPopup({
           responseToken: "awb.eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiZGlyIn0..THBnfZ4z1r8UZlAV1099YA.bOAFIloOovCmJRLaTz5kZNT73ORVznU7UrZsLx-YEdC9MVtI6x3IhX5lvBEArk4GaNR3xY-uxg8avuBdZ0FIc5cloXLhypkoWcKCFyTy91HD3AsauauDvwZ3yaDxy9DZ9hLlQ10ZM-iark8NdaM4yZfDltOoqtMF48uELfx1Aqq-CbmmyG0w79uHFetzQSczB5luUYpxGTPygDxmszS5fuqu7iH6RfnZvvKewXX6ZZs8-OLvG-g4FRKYJuZUOMta5VViPO4ByXfuFal3OKWcszs9ucgBuSgypbOL7r_RsnBC2zq673uchqw7QV_YKJdHSTN0_NCKqD2wQ57EKZZ1AW9bhdwzWullD1YA1f7vX_VJYW-JFJOhz8nBpjcoVPVNCaebQz9aT5KnQwf2vlcZf9IVVVUXFslTNepg9uZgyrhO1BKEswYg1rYruZqZUmPFHfRLH1_dtJujKaTLfmC102P8v2ENNBrnfYnySAyqcpc.lIUnhkU0qwNm1HUllFUlWw",
-          screen: 'connecting',
+          currentScreen: 'connecting',
         })
       }
     }
@@ -61,15 +63,22 @@ function Connecting({shouldShowMFA, shouldShowError, handleErrorChange, handleMF
 
   return (
     <Div ref={contentRef}>
-      <label><p>Connecting...</p></label>
-
-      <Link to="/success">
-        <button style={{ marginTop: '20px'}} type="button">
-          Continue
-        </button>
-      </Link>
+      <div className="iframeWrapper" style={{ position: 'relative', width: '100%', border: 'solid 1px #dcdcdc', borderRadius: '2px', padding: '30px 30px 0' }}>
+        <div style={{ marginBottom: '110px' }}>
+          <h4>Connecting Screen</h4>
+          {isFetching ? <>
+            <div className="spinner">
+              <div className="dot1" />
+              <div className="dot2"/>
+            </div>
+            <label style={{ display: "flex", justifyContent: 'center'}}>Connecting to bank...</label>
+          </> :
+            <label style={{ display: "flex", justifyContent: 'center'}}>successfully connected to bank & data sent to IDX</label>
+          }
+        </div>
+      </div>
     </Div>
-  );
+  )
 }
 
 export default Connecting

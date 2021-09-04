@@ -2,39 +2,32 @@ import React, {useEffect, useRef, useState} from 'react'
 import styled from "styled-components";
 import {Link, useHistory} from "react-router-dom";
 import {forwardMessageToMainAppFromPopup} from "../../utils/iframe";
+import Header from "../Header";
+import Footer from "../footer";
+import './recaptcha.css'
+import { ContainerInput, ContainerLabel, Checkmark } from '../checkboxStyle'
 
 const Div = styled.div`
   padding: 20px;
 `
 
-function Recaptcha({navigateProps}) {
-  const [navigate, setNavigate] = navigateProps
-  const history = useHistory()
-
-  const handleClick = () => {
-    history.push('/connecting')
-  }
-
+function Recaptcha({navigateProps, shouldDisplayHeader = false, shouldDisplayFooter = true, background, fontColor }) {
   const btnRef = useRef(null)
 
-  useEffect(() => {
-    setNavigate(false)
-    navigate === 'forward' && btnRef.current.click()
-    navigate === 'back' && history.goBack()
-  }, [navigate, setNavigate])
-
-  const [isPassed, setIsPassed] = useState(false)
+  const [enablePrimaryButton, setEnablePrimaryButton] = useState(false)
 
   const handleInputChange = () => {
-    setIsPassed(prevState => !prevState)
+    setEnablePrimaryButton(prevState => !prevState)
   }
 
   useEffect(() => {
-    forwardMessageToMainAppFromPopup({
-      enablePrimaryButton: isPassed,
-      screen: 'recaptcha',
-    })
-  }, [isPassed])
+    if (shouldDisplayFooter) {
+      forwardMessageToMainAppFromPopup({
+        enablePrimaryButton,
+        currentScreen: 'recaptcha',
+      })
+    }
+  }, [enablePrimaryButton, shouldDisplayFooter])
 
   const contentRef = useRef(null)
 
@@ -44,26 +37,38 @@ function Recaptcha({navigateProps}) {
     const message = {
       height: `${clientHeight}px`,
       width: '352px',
-      screen: 'recaptcha',
+      currentScreen: 'recaptcha',
     }
 
     forwardMessageToMainAppFromPopup(message)
   }, [])
 
+  const iframeData = {
+    enablePrimaryButton,
+  }
+
+  const [navigate, setNavigate] = navigateProps
+  const history = useHistory()
+  useEffect(() => {
+    setNavigate(false)
+    navigate === 'forward' && history.push('/connecting')
+    navigate === 'back' && history.goBack()
+  }, [history, navigate, setNavigate])
+
   return (
     <Div ref={contentRef}>
-      <label><p>Recaptcha Screen</p></label>
-      <label>
-        click recaptcha
-        <input
-          name="recaptcha"
-          type="checkbox"
-          checked={isPassed}
-          onChange={handleInputChange} />
-      </label>
-      <button ref={btnRef} style={{ marginTop: '20px'}} type="button" onClick={handleClick}>
-        Continue
-      </button>
+      <div className="iframeWrapper" style={{ position: 'relative', width: '100%', border: 'solid 1px #dcdcdc', borderRadius: '2px', padding: '30px 30px 0' }}>
+        {shouldDisplayHeader && <Header />}
+        <div style={{ marginBottom: '110px' }}>
+          <h4>Recaptcha Screen</h4>
+          <ContainerLabel theme={background}> Click to confirm you're not a robot
+            <ContainerInput theme={background} type="checkbox" onChange={handleInputChange} checked={enablePrimaryButton} />
+            <Checkmark className="checkmark" />
+          </ContainerLabel>
+
+        </div>
+        {shouldDisplayFooter && <Footer background={background} fontColor={fontColor} iframeData={iframeData} currentScreen="recaptcha" screenToNavigate="connecting" />}
+      </div>
     </Div>
   );
 }

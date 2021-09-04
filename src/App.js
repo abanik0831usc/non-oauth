@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import React, {useEffect, useRef, useState} from "react";
 import {
-  BrowserRouter as Router,
+  MemoryRouter as Router,
   Switch,
   Route,
   Link
@@ -17,10 +17,11 @@ import {
   receiveMessageFromMainAppToPopup,
   removeIframeEventListener
 } from "./utils/iframe";
+import ContextApp from './Context'
 
 function App() {
   const [navigate, setNavigate] = useState('')
-  const [theme, setTheme] = useState('')
+  const [theme, setTheme] = useState('sbg2')
 
   useEffect(() => {
     receiveMessageFromMainAppToPopup(setNavigate, setTheme)
@@ -29,22 +30,42 @@ function App() {
 
   const navigateProps = [navigate, setNavigate]
 
-  const color = (type) => {
-    switch (type) {
+  const color = (themeName) => {
+    switch (themeName) {
       case 'sbg2':
-        return 'rgb(44, 160, 28)'
+        return {
+          background: 'rgb(44, 160, 28)',
+          color: 'white',
+        }
       case 'mint':
-        return '#32d9f2'
+        return {
+          background: '#32d9f2',
+          color: 'white',
+        }
       case 'ctg':
-        return '#037c8f'
+        return {
+          background: '#037c8f',
+          color: 'white',
+        }
       case 'intuit':
-        return 'linear-gradient(to bottom, #3e6cc9 0%, #2e50b6 100%)'
+        return {
+          background: 'linear-gradient(to bottom, #3e6cc9 0%, #2e50b6 100%)',
+          color: 'white',
+        }
       case 'ck':
-        return '#008600'
+        return {
+          background: '#008600',
+          color: 'white',
+        }
       default:
-        return 'teal'
+        return {
+          background: 'linear-gradient(to bottom, #3e6cc9 0%, #2e50b6 100%)',
+          color: 'white',
+        }
     }
   }
+
+  const { background, color: fontColor } = color(theme)
 
   const contentRef = useRef(null)
 
@@ -61,28 +82,28 @@ function App() {
 
   return (
       <Router>
-        <div style={{ background: color(theme) }}>
+        <div style={{ width: '922px' }}>
 
           {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
           <Switch>
             <Route path="/recaptcha">
-              <Recaptcha navigateProps={navigateProps} />
+              <Recaptcha navigateProps={navigateProps} background={background} fontColor={fontColor} />
             </Route>
             <Route path="/mfa">
-              <MFA navigateProps={navigateProps} />
+              <MFA navigateProps={navigateProps} background={background} fontColor={fontColor} />
             </Route>
             <Route path="/connecting">
               <Connecting navigateProps={navigateProps} handleMFAChange={handleMFAChange} handleErrorChange={handleErrorChange} shouldShowMFA={isMFAEnabled} shouldShowError={isErrorEnabled} />
             </Route>
             <Route path="/success">
-              <Success navigateProps={navigateProps} />
+              <Success navigateProps={navigateProps} background={background} fontColor={fontColor} />
             </Route>
             <Route path="/error">
-              <Error navigateProps={navigateProps} />
+              <Error navigateProps={navigateProps} background={background} fontColor={fontColor} />
             </Route>
             <Route path="/">
-              <AuthScreen navigateProps={navigateProps} handleMFAChange={handleMFAChange} handleErrorChange={handleErrorChange} shouldShowMFA={isMFAEnabled} shouldShowError={isErrorEnabled} />
+              <AuthScreen navigateProps={navigateProps} handleMFAChange={handleMFAChange} handleErrorChange={handleErrorChange} shouldShowMFA={isMFAEnabled} shouldShowError={isErrorEnabled}  background={background} fontColor={fontColor} />
             </Route>
           </Switch>
         </div>
@@ -90,8 +111,12 @@ function App() {
   );
 }
 
-function About() {
-  return <div>hello about</div>
+function ContextAPIApp() {
+  return (
+    <ContextApp>
+      <App />
+    </ContextApp>
+  )
 }
 
-export default App;
+export default ContextAPIApp;
