@@ -35,7 +35,6 @@ function AuthScreen({navigateProps, shouldShowMFA, background, fontColor, should
     const [password, setPassword] = useState('')
 
     const contentRef = useRef(null)
-    const divRef = useRef(null)
     const [iframeData, setIFrameData] = useState({ enablePrimaryButton: false })
 
     const handleUsernameChange = (event) => {
@@ -72,11 +71,21 @@ function AuthScreen({navigateProps, shouldShowMFA, background, fontColor, should
 
     useEffect(() => {
         let clientHeight = contentRef && contentRef.current && contentRef.current.clientHeight
+        let clientWidth = contentRef && contentRef.current && contentRef.current.clientWidth
 
-        const message = {
-            height: clientHeight > 352 ? '352px' : `${clientHeight}px`,
-            width: '352px',
-            currentScreen: 'authentication',
+        let message = {}
+        if (shouldDisplayFooter) {
+            message = {
+                height: `${clientHeight}px`,
+                width: `${clientWidth}px`,
+                currentScreen: 'authentication',
+            }
+        } else {
+            message = {
+                height: clientHeight > 352 ? '352px' : `${clientHeight}px`,
+                width: clientWidth,
+                currentScreen: 'authentication',
+            }
         }
 
         forwardMessageToMainAppFromPopup(message)
@@ -89,7 +98,7 @@ function AuthScreen({navigateProps, shouldShowMFA, background, fontColor, should
     }, [history, navigate, setNavigate])
 
     return (
-      <Div ref={divRef}>
+      <Div ref={contentRef}>
           <div className="iframeWrapper" style={{ position: 'relative', width: '100%', border: 'solid 1px #dcdcdc', borderRadius: '2px', padding: '30px 30px 0' }}>
               {shouldDisplayHeader && <Header />}
 
