@@ -37,7 +37,7 @@ function Recaptcha({navigateProps, shouldDisplayHeader = false, shouldDisplayFoo
 
     const message = {
       height: `${clientHeight}px`,
-      width: clientWidth > 902 ? '902px' : `${clientWidth}px`,
+      width: clientWidth > 860 ? '860px' : `${clientWidth}px`,
       currentScreen: 'recaptcha',
     }
 

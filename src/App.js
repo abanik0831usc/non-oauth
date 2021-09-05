@@ -82,7 +82,7 @@ function App() {
 
   return (
       <Router>
-        <div style={{ width: '922px' }}>
+        <div style={{ width: '860px' }}>
 
           {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}

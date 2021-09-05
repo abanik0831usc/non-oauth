@@ -31,7 +31,7 @@ function Connecting({shouldShowMFA, shouldShowError, handleErrorChange, handleMF
 
     forwardMessageToMainAppFromPopup({
       height: `${clientHeight}px`,
-      width: clientWidth > 902 ? '902px' : `${clientWidth}px`,
+      width: clientWidth > 860 ? '860px' : `${clientWidth}px`,
       isConnectingScreen: true,
       currentScreen: 'connecting',
     })

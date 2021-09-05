@@ -77,13 +77,13 @@ function AuthScreen({navigateProps, shouldShowMFA, background, fontColor, should
         if (shouldDisplayFooter) {
             message = {
                 height: `${clientHeight}px`,
-                width: clientWidth > 902 ? '902px' : `${clientWidth}px`,
+                width: clientWidth > 860 ? '860px' : `${clientWidth}px`,
                 currentScreen: 'authentication',
             }
         } else {
             message = {
                 height: `${clientHeight}px`,
-                width: clientWidth > 902 ? '902px' : `${clientWidth}px`,
+                width: clientWidth > 860 ? '860px' : `${clientWidth}px`,
                 currentScreen: 'authentication',
             }
         }

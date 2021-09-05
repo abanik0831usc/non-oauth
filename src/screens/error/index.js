@@ -26,7 +26,7 @@ function Recaptcha({navigateProps, shouldDisplayFooter = true, shouldDisplayHead
 
 		const message = {
 			height: `${clientHeight}px`,
-			width: clientWidth > 902 ? '902px' : `${clientWidth}px`,
+			width: clientWidth > 860 ? '860px' : `${clientWidth}px`,
 			currentScreen: 'error',
 			enablePrimaryButton: true,
 			code: '103',
