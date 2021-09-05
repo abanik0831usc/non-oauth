@@ -3,6 +3,7 @@ import './App.css';
 import React, {useContext, useEffect, useRef, useState} from "react";
 import {
   MemoryRouter as Router,
+  BrowserRouter,
   Switch,
   Route,
   Link
@@ -90,7 +91,7 @@ function App() {
   }
 
   return (
-      <Router>
+      <BrowserRouter>
         <div style={{ width: '860px' }}>
 
           {/* A <Switch> looks through its children <Route>s and
@@ -116,7 +117,7 @@ function App() {
             </Route>
           </Switch>
         </div>
-      </Router>
+      </BrowserRouter>
   );
 }
 

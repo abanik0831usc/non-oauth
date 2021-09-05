@@ -97,6 +97,10 @@ function AuthScreen({iframeScreenStackSize, navigateProps, isAuthScreenFirstInSt
         navigate === 'forward' && history.push('/recaptcha')
     }, [history, navigate, setNavigate])
 
+    const submit = (event) => {
+        event.preventDefault()
+    }
+
     return (
       <Div ref={contentRef}>
           <div className="iframeWrapper" style={{ position: 'relative', width: '100%', border: 'solid 1px transparent', borderRadius: '2px', padding: '30px 30px 0' }}>
@@ -113,7 +117,7 @@ function AuthScreen({iframeScreenStackSize, navigateProps, isAuthScreenFirstInSt
               </ContainerLabel>
 
               <div style={{ marginBottom: '110px' }}>
-                   <form>
+                   <form onSubmit={submit}>
                        <label htmlFor="username">Username:</label><br />
                        <Input borderColor={background} placeholder="Enter your username" id="username" onChange={handleUsernameChange} value={username} type="text" style={{ marginBottom: '20px' }}/>
                        <br />

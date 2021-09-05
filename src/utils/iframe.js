@@ -72,9 +72,9 @@ export function removeIframeEventListener() {
 
     event(messageEvent, handlePostMessage, false)
 }
-
+// && e.origin !== 'http://localhost:3000'
 const handlePostMessage = (e, setState, setTheme, setIsAuthScreenFirstInStack) => {
-    if (e.data.idxMessage && e.origin !== 'http://localhost:3000') {
+    if (e.data.idxMessage) {
         const data = JSON.parse(e.data.idxMessage)
         data.navigate && setState(data.navigate)
         data.theme && setTheme(data.theme)

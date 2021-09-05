@@ -42,12 +42,12 @@ function Connecting({shouldShowMFA, shouldShowError, handleErrorChange, handleMF
       setIsFetching(false)
       if (shouldShowMFA) {
         handleMFAChange()
-        history.push('/mfa')
+        return history.push('/mfa')
       }
 
       if (shouldShowError) {
         handleErrorChange()
-        history.push('/error')
+        return history.push('/error')
       }
 
       if (!shouldShowMFA && !shouldShowError) {
@@ -59,7 +59,7 @@ function Connecting({shouldShowMFA, shouldShowError, handleErrorChange, handleMF
     }
 
     invoke()
-  }, [handleErrorChange, handleMFAChange, history, shouldShowError, shouldShowMFA])
+  }, [])
 
   const contentRef = useRef(null)
 

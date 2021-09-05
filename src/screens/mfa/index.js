@@ -86,29 +86,29 @@ function MFA({navigateProps, background, fontColor, shouldDisplayIntuitFooter = 
 
   const [navigate, setNavigate] = navigateProps
   const history = useHistory()
+
   useEffect(() => {
+    console.log('surely not here...')
     setNavigate(false)
     navigate === 'forward' && history.push({
       state: { mfa: true },
       pathname: '/connecting',
     })
     navigate === 'back' && history.push('/')
-  }, [history, navigate, setNavigate])
+  }, [navigate, setNavigate])
 
-  const handleKeyPress = (event) => {
-    if (event.which === '13') {
-      event.preventDefault()
-    }
+  const submit = (event) => {
+    event.preventDefault()
   }
-
+  
   return (
     <Div ref={contentRef}>
       <div className="iframeWrapper" style={{ position: 'relative', width: '100%', border: 'solid 1px transparent', borderRadius: '2px', padding: '30px 30px 0' }}>
         {shouldDisplayHeader && <Header />}
         <div style={{ marginBottom: '110px' }}>
-          <form>
+          <form onSubmit={submit}>
             <label htmlFor="mfa">MFA answer:</label><br />
-            <Input onKeyPress={handleKeyPress} borderColor={background} placeholder="Enter your username" id="mfa" onChange={handlemfachange} value={mfa} type="text" />
+            <Input borderColor={background} placeholder="Enter your username" id="mfa" onChange={handlemfachange} value={mfa} type="text" />
           </form>
         </div>
         {!shouldDisplayIntuitFooter && <Footer background={background} fontColor={fontColor} iframeData={iframeData} currentScreen="mfa" screenToNavigate="connecting" />}
