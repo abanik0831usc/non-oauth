@@ -88,9 +88,18 @@ function MFA({navigateProps, background, fontColor, shouldDisplayIntuitFooter = 
   const history = useHistory()
   useEffect(() => {
     setNavigate(false)
-    navigate === 'forward' && history.push('/connecting?mfa=true')
+    navigate === 'forward' && history.push({
+      state: { mfa: true },
+      pathname: '/connecting',
+    })
     navigate === 'back' && history.push('/')
   }, [history, navigate, setNavigate])
+
+  const handleKeyPress = (event) => {
+    if (event.which === '13') {
+      event.preventDefault()
+    }
+  }
 
   return (
     <Div ref={contentRef}>
@@ -99,7 +108,7 @@ function MFA({navigateProps, background, fontColor, shouldDisplayIntuitFooter = 
         <div style={{ marginBottom: '110px' }}>
           <form>
             <label htmlFor="mfa">MFA answer:</label><br />
-            <Input borderColor={background} placeholder="Enter your username" id="mfa" onChange={handlemfachange} value={mfa} type="text" />
+            <Input onKeyPress={handleKeyPress} borderColor={background} placeholder="Enter your username" id="mfa" onChange={handlemfachange} value={mfa} type="text" />
           </form>
         </div>
         {!shouldDisplayIntuitFooter && <Footer background={background} fontColor={fontColor} iframeData={iframeData} currentScreen="mfa" screenToNavigate="connecting" />}

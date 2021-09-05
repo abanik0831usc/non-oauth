@@ -36,7 +36,7 @@ function Connecting({shouldShowMFA, shouldShowError, handleErrorChange, handleMF
         isConnectingScreen: true,
         currentScreen: 'connecting',
       })
-      
+
       await sleep()
 
       setIsFetching(false)
