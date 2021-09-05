@@ -28,11 +28,11 @@ function App() {
   const params = new URLSearchParams(document.location.search.substring(1))
   const themeInfo = params.get('theme');
   const isLaunchPoint = params.get('isAuthScreenFirstInStack') === 'true'
-
-  const shouldDisplayIntuitFooter = typeof params.get('shouldDisplayIntuitFooter') === 'string' ? params.get('shouldDisplayIntuitFooter') === 'true' : false
+  const displayFooter = typeof params.get('shouldDisplayIntuitFooter') === 'string' ? params.get('shouldDisplayIntuitFooter') === 'true' : false
 
   const [theme, setTheme] = useState(themeInfo)
   const [isAuthScreenFirstInStack, setIsAuthScreenFirstInStack] = useState(isLaunchPoint)
+  const [shouldDisplayIntuitFooter] = useState(displayFooter)
 
 
   useEffect(() => {

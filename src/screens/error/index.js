@@ -44,7 +44,7 @@ function Recaptcha({iframeScreenStackSize, navigateProps, shouldDisplayIntuitFoo
 
 	return (
 		<Div ref={contentRef}>
-			<div className="iframeWrapper" style={{ position: 'relative', width: '100%', border: 'solid 1px transparent', borderRadius: '2px', padding: '30px 30px 0' }}>
+			<div className="iframeWrapper" style={{ position: 'relative', width: '100%', border: 'solid 1px transparent', borderRadius: '2px' }}>
 				{shouldDisplayHeader && <Header />}
 				<div style={{ marginBottom: '110px' }}>
 					<h4>Error Screen</h4>
