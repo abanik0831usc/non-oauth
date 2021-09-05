@@ -56,9 +56,10 @@ function Recaptcha({navigateProps, shouldDisplayHeader = false, shouldDisplayFoo
     navigate === 'back' && history.goBack()
   }, [history, navigate, setNavigate])
 
+  // dcdcdc
   return (
     <Div ref={contentRef}>
-      <div className="iframeWrapper" style={{ position: 'relative', width: '100%', border: 'solid 1px #dcdcdc', borderRadius: '2px', padding: '30px 30px 0' }}>
+      <div className="iframeWrapper" style={{ position: 'relative', width: '100%', border: 'solid 1px transparent', borderRadius: '2px', padding: '30px 30px 0' }}>
         {shouldDisplayHeader && <Header />}
         <div style={{ marginBottom: '110px' }}>
           <h4>Recaptcha Screen</h4>
