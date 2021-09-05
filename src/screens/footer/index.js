@@ -4,11 +4,15 @@ import { useHistory } from "react-router-dom";
 import { ContainerContext } from "../../Context";
 import {forwardMessageToMainAppFromPopup} from "../../utils/iframe";
 
-export default function Footer({ background, fontColor, currentScreen, screenToNavigate, iframeData}) {
+export default function Footer({ background, fontColor, currentScreen, screenToNavigate, iframeData, isAuthScreenFirstInStack }) {
 	const history = useHistory()
 
 	const [iframeScreenStackSize, setIframeScreenStackSize] = useContext(ContainerContext)
 
+	const shouldShowBackBtn = !(isAuthScreenFirstInStack && (currentScreen === 'authentication' || currentScreen === 'error'))
+
+	console.log('mh:: ', isAuthScreenFirstInStack)
+	console.log('mh:: ', shouldShowBackBtn)
 	const handleBackClick = () => {
 		const idxMessage = {
 			currentScreen,
@@ -22,7 +26,7 @@ export default function Footer({ background, fontColor, currentScreen, screenToN
 			return history.push('/')
 		}
 
-		if (currentScreen !== 'error') {
+		if (currentScreen !== 'error' || currentScreen === 'authentication') {
 			history.goBack()
 		}
 	}
@@ -62,7 +66,8 @@ export default function Footer({ background, fontColor, currentScreen, screenToN
 				transform: 'translate(-50%, -50%)'
 			}}>
 				<div style={{ display: 'flex', justifyContent: 'flex-end', gap: '20px' }}>
-					{(iframeScreenStackSize !== 0 || currentScreen === 'error') && <Button label={'Back'} backgroundColor={background} color={fontColor} onClick={handleBackClick} />}
+					{/*{(iframeScreenStackSize !== 0 || currentScreen === 'error') && shouldShowBackBtn && <Button label={'Back'} backgroundColor={background} color={fontColor} onClick={handleBackClick} />}*/}
+					{shouldShowBackBtn && <Button label={'Back'} backgroundColor={background} color={fontColor} onClick={handleBackClick} />}
 					<Button label={iframeData.primaryButtonLabel || 'Continue'} backgroundColor={background} color={fontColor} primary={true} onClick={handleContinueClick} disabled={!iframeData.enablePrimaryButton} />
 				</div>
 			</div>

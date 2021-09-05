@@ -38,7 +38,7 @@ export const forwardMessageToMainAppFromPopup = (idxMessage) => {
     window.parent.postMessage({ idxMessage }, '*')
 }
 
-export const receiveMessageFromMainAppToPopup = (setState, setTheme) => {
+export const receiveMessageFromMainAppToPopup = (setState, setTheme, setIsAuthScreenFirstInStack) => {
     const eventMethod = window.addEventListener
       ? 'addEventListener'
       : 'attachEvent'
@@ -57,7 +57,7 @@ export const receiveMessageFromMainAppToPopup = (setState, setTheme) => {
     // Listen to message from intuit-fdp-auth-redirect-client
     event(
       messageEvent,
-      (e) => handlePostMessage(e, setState, setTheme),
+      (e) => handlePostMessage(e, setState, setTheme, setIsAuthScreenFirstInStack),
       false
     )
 }
@@ -79,5 +79,6 @@ const handlePostMessage = (e, setState, setTheme) => {
         const data = JSON.parse(e.data.idxMessage)
         data.navigate && setState(data.navigate)
         data.theme && setTheme(data.theme)
+        data.isAuthScreenFirstInStack && setTheme(data.isAuthScreenFirstInStack)
     }
 }

@@ -27,7 +27,7 @@ const Input = styled.input`
     }
 `
 
-function AuthScreen({navigateProps, shouldShowMFA, background, fontColor, shouldShowError, handleErrorChange, handleMFAChange, theme = "sbg2", shouldDisplayFooter = true, shouldDisplayHeader = false }) {
+function AuthScreen({navigateProps, isAuthScreenFirstInStack, shouldShowMFA, background, fontColor, shouldShowError, handleErrorChange, handleMFAChange, theme = "sbg2", shouldDisplayFooter = true, shouldDisplayHeader = false }) {
     const [navigate, setNavigate] = navigateProps
     const [btnsEnabled, setBtnsEnabled] = useState(false)
 
@@ -121,7 +121,7 @@ function AuthScreen({navigateProps, shouldShowMFA, background, fontColor, should
                         <Input borderColor={background} placeholder="enter your password" id="password" onChange={handlePasswordChange} value={password} type="password"/>
                    </form>
               </div>
-              {shouldDisplayFooter && <Footer background={background} fontColor={fontColor} iframeData={iframeData} currentScreen="authentication" screenToNavigate="recaptcha" />}
+              {shouldDisplayFooter && <Footer isAuthScreenFirstInStack={isAuthScreenFirstInStack} background={background} fontColor={fontColor} iframeData={iframeData} currentScreen="authentication" screenToNavigate="recaptcha" />}
           </div>
       </Div>
     )

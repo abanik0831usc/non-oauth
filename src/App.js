@@ -22,9 +22,10 @@ import ContextApp from './Context'
 function App() {
   const [navigate, setNavigate] = useState('')
   const [theme, setTheme] = useState('sbg2')
+  const [isAuthScreenFirstInStack, setIsAuthScreenFirstInStack] = useState(true)
 
   useEffect(() => {
-    receiveMessageFromMainAppToPopup(setNavigate, setTheme)
+    receiveMessageFromMainAppToPopup(setNavigate, setTheme, setIsAuthScreenFirstInStack)
     return () => removeIframeEventListener()
   }, [])
 
@@ -67,8 +68,6 @@ function App() {
 
   const { background, color: fontColor } = color(theme)
 
-  const contentRef = useRef(null)
-
   const [isErrorEnabled, setIsErrorEnabled] = useState(false)
   const [isMFAEnabled, setIsMFAEnabled] = useState(false)
 
@@ -100,10 +99,10 @@ function App() {
               <Success navigateProps={navigateProps} background={background} fontColor={fontColor} />
             </Route>
             <Route path="/error">
-              <Error navigateProps={navigateProps} background={background} fontColor={fontColor} />
+              <Error isAuthScreenFirstInStack={isAuthScreenFirstInStack} navigateProps={navigateProps} background={background} fontColor={fontColor} />
             </Route>
             <Route path="/">
-              <AuthScreen navigateProps={navigateProps} handleMFAChange={handleMFAChange} handleErrorChange={handleErrorChange} shouldShowMFA={isMFAEnabled} shouldShowError={isErrorEnabled}  background={background} fontColor={fontColor} />
+              <AuthScreen isAuthScreenFirstInStack={isAuthScreenFirstInStack} navigateProps={navigateProps} handleMFAChange={handleMFAChange} handleErrorChange={handleErrorChange} shouldShowMFA={isMFAEnabled} shouldShowError={isErrorEnabled}  background={background} fontColor={fontColor} />
             </Route>
           </Switch>
         </div>
