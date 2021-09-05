@@ -73,7 +73,7 @@ export default function Footer({ background, fontColor, currentScreen, screenToN
 				position: 'absolute',
 				bottom: '0',
 				left: '50%',
-				transform: 'translate(-50%, -50%)'
+				transform: 'translate(-54%, -50%)'
 			}}>
 				<div style={{ display: 'flex', justifyContent: 'flex-end', gap: '20px' }}>
 					{/*{(iframeScreenStackSize !== 0 || currentScreen === 'error') && shouldShowBackBtn && <Button label={'Back'} backgroundColor={background} color={fontColor} onClick={handleBackClick} />}*/}
