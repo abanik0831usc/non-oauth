@@ -1,19 +1,21 @@
-import React, {useEffect, useRef, useState} from 'react'
+import React, {useContext, useEffect, useRef, useState} from 'react'
 import styled from "styled-components";
 import {Link, useHistory} from "react-router-dom";
 import {forwardMessageToMainAppFromPopup} from "../../utils/iframe";
 import Header from "../Header";
 import Footer from "../footer";
+import {ContainerContext} from "../../Context";
 
 const Div = styled.div`
   padding: 0;
 `
 
-function Recaptcha({navigateProps, shouldDisplayFooter = true, shouldDisplayHeader = false, background, fontColor, isAuthScreenFirstInStack }) {
+function Recaptcha({iframeScreenStackSize, navigateProps, shouldDisplayFooter = true, shouldDisplayHeader = false, background, fontColor, isAuthScreenFirstInStack }) {
 	const [navigate, setNavigate] = navigateProps
 	const history = useHistory()
 
 	const [iframeData, setIframeData] = useState({ enablePrimaryButton: true, primaryButtonLabel: 'Escape' })
+	const [, setIframeScreenStackSize] = useContext(ContainerContext)
 	const handleClick = () => {
 		history.push('/connecting')
 	}
@@ -21,6 +23,7 @@ function Recaptcha({navigateProps, shouldDisplayFooter = true, shouldDisplayHead
 	const contentRef = useRef(null)
 
 	useEffect(() => {
+		setIframeScreenStackSize(0)
 		let clientHeight = contentRef && contentRef.current && contentRef.current.clientHeight
 		let clientWidth = contentRef && contentRef.current && contentRef.current.clientWidth
 
@@ -34,6 +37,7 @@ function Recaptcha({navigateProps, shouldDisplayFooter = true, shouldDisplayHead
 			otherDetails: 'share all other error reasons',
 			primaryButtonLabel: 'More Info',
 			shouldEnablePrimaryButton: false,
+			iframeScreenStackSize: 0,
 		}
 		forwardMessageToMainAppFromPopup(message)
 	}, [])

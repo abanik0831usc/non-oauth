@@ -27,7 +27,7 @@ const Input = styled.input`
     }
 `
 
-function AuthScreen({navigateProps, isAuthScreenFirstInStack, shouldShowMFA, background, fontColor, shouldShowError, handleErrorChange, handleMFAChange, theme = "sbg2", shouldDisplayFooter = true, shouldDisplayHeader = false }) {
+function AuthScreen({iframeScreenStackSize, navigateProps, isAuthScreenFirstInStack, shouldShowMFA, background, fontColor, shouldShowError, handleErrorChange, handleMFAChange, theme, shouldDisplayFooter = true, shouldDisplayHeader = false }) {
     const [navigate, setNavigate] = navigateProps
     const [btnsEnabled, setBtnsEnabled] = useState(false)
 
@@ -85,6 +85,7 @@ function AuthScreen({navigateProps, isAuthScreenFirstInStack, shouldShowMFA, bac
                 height: `${clientHeight}px`,
                 width: clientWidth > 860 ? '860px' : `${clientWidth}px`,
                 currentScreen: 'authentication',
+                iframeScreenStackSize,
             }
         }
 

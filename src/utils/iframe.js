@@ -62,7 +62,6 @@ export const receiveMessageFromMainAppToPopup = (setState, setTheme, setIsAuthSc
     )
 }
 
-
 export function removeIframeEventListener() {
     const eventMethod = window.removeEventListener
       ? 'removeEventListener'
@@ -74,11 +73,12 @@ export function removeIframeEventListener() {
     event(messageEvent, handlePostMessage, false)
 }
 
-const handlePostMessage = (e, setState, setTheme) => {
-    if (e.data.idxMessage && e.origin !== 'http://localhost:3000') {
+const handlePostMessage = (e, setState, setTheme, setIsAuthScreenFirstInStack) => {
+    // if (e.data.idxMessage && e.origin !== 'http://localhost:3000') {
+    if (e.data.idxMessage) {
         const data = JSON.parse(e.data.idxMessage)
         data.navigate && setState(data.navigate)
         data.theme && setTheme(data.theme)
-        data.isAuthScreenFirstInStack && setTheme(data.isAuthScreenFirstInStack)
+        data.isAuthScreenFirstInStack && setIsAuthScreenFirstInStack(data.isAuthScreenFirstInStack)
     }
 }

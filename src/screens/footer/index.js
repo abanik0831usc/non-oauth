@@ -11,14 +11,22 @@ export default function Footer({ background, fontColor, currentScreen, screenToN
 
 	const shouldShowBackBtn = !(isAuthScreenFirstInStack && (currentScreen === 'authentication' || currentScreen === 'error'))
 
-	console.log('mh:: ', isAuthScreenFirstInStack)
-	console.log('mh:: ', shouldShowBackBtn)
 	const handleBackClick = () => {
-		const idxMessage = {
-			currentScreen,
+		let stackSize
+
+		if (currentScreen === 'error' || currentScreen === 'authentication') {
+			stackSize = 0
+		} else {
+			stackSize = iframeScreenStackSize - 1
 		}
 
-		setIframeScreenStackSize(iframeScreenStackSize - 1)
+		setIframeScreenStackSize(stackSize)
+
+		const idxMessage = {
+			currentScreen,
+			btnClicked: 'back',
+			iframeScreenStackSize,
+		}
 
 		forwardMessageToMainAppFromPopup(idxMessage)
 
@@ -26,7 +34,7 @@ export default function Footer({ background, fontColor, currentScreen, screenToN
 			return history.push('/')
 		}
 
-		if (currentScreen !== 'error' || currentScreen === 'authentication') {
+		if (!(currentScreen !== 'error' || currentScreen !== 'authentication')) {
 			history.goBack()
 		}
 	}
@@ -35,6 +43,7 @@ export default function Footer({ background, fontColor, currentScreen, screenToN
 		const idxMessage = {
 			screenToNavigate,
 			currentScreen,
+			btnClicked: 'forward',
 		}
 
 		if (screenToNavigate === 'connecting') {
@@ -43,6 +52,7 @@ export default function Footer({ background, fontColor, currentScreen, screenToN
 			setIframeScreenStackSize(iframeScreenStackSize + 1)
 		}
 
+		// iframeScreenStackSize
 		forwardMessageToMainAppFromPopup(idxMessage)
 
 		// console.log('data from Intuit to aggregator on primary(continue) button click: ', idxMessage)

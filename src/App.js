@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import React, {useEffect, useRef, useState} from "react";
+import React, {useContext, useEffect, useRef, useState} from "react";
 import {
   MemoryRouter as Router,
   Switch,
@@ -17,17 +17,25 @@ import {
   receiveMessageFromMainAppToPopup,
   removeIframeEventListener
 } from "./utils/iframe";
-import ContextApp from './Context'
+import ContextApp, {ContainerContext} from './Context'
 
 function App() {
   const [navigate, setNavigate] = useState('')
-  const [theme, setTheme] = useState('sbg2')
-  const [isAuthScreenFirstInStack, setIsAuthScreenFirstInStack] = useState(true)
+
+  const [iframeScreenStackSize] = useContext(ContainerContext)
+
+  const params = new URLSearchParams(document.location.search.substring(1))
+  const themeInfo = params.get('theme');
+  const isLaunchPoint = params.get('isAuthScreenFirstInStack') === 'true'
+
+  const [theme, setTheme] = useState(themeInfo)
+  const [isAuthScreenFirstInStack, setIsAuthScreenFirstInStack] = useState(isLaunchPoint)
+
 
   useEffect(() => {
     receiveMessageFromMainAppToPopup(setNavigate, setTheme, setIsAuthScreenFirstInStack)
     return () => removeIframeEventListener()
-  }, [])
+  }, [isAuthScreenFirstInStack, theme, setTheme, setIsAuthScreenFirstInStack])
 
   const navigateProps = [navigate, setNavigate]
 
@@ -87,22 +95,22 @@ function App() {
             renders the first one that matches the current URL. */}
           <Switch>
             <Route path="/recaptcha">
-              <Recaptcha navigateProps={navigateProps} background={background} fontColor={fontColor} />
+              <Recaptcha iframeScreenStackSize={iframeScreenStackSize} navigateProps={navigateProps} theme={theme} background={background} fontColor={fontColor} />
             </Route>
             <Route path="/mfa">
-              <MFA navigateProps={navigateProps} background={background} fontColor={fontColor} />
+              <MFA iframeScreenStackSize={iframeScreenStackSize} navigateProps={navigateProps} theme={theme} background={background} fontColor={fontColor} />
             </Route>
             <Route path="/connecting">
-              <Connecting navigateProps={navigateProps} handleMFAChange={handleMFAChange} handleErrorChange={handleErrorChange} shouldShowMFA={isMFAEnabled} shouldShowError={isErrorEnabled} />
+              <Connecting iframeScreenStackSize={iframeScreenStackSize} navigateProps={navigateProps} theme={theme} handleMFAChange={handleMFAChange} handleErrorChange={handleErrorChange} shouldShowMFA={isMFAEnabled} shouldShowError={isErrorEnabled} />
             </Route>
             <Route path="/success">
-              <Success navigateProps={navigateProps} background={background} fontColor={fontColor} />
+              <Success iframeScreenStackSize={iframeScreenStackSize} navigateProps={navigateProps} background={background} theme={theme} fontColor={fontColor} />
             </Route>
             <Route path="/error">
-              <Error isAuthScreenFirstInStack={isAuthScreenFirstInStack} navigateProps={navigateProps} background={background} fontColor={fontColor} />
+              <Error iframeScreenStackSize={iframeScreenStackSize} isAuthScreenFirstInStack={isAuthScreenFirstInStack} theme={theme} navigateProps={navigateProps} background={background} fontColor={fontColor} />
             </Route>
             <Route path="/">
-              <AuthScreen isAuthScreenFirstInStack={isAuthScreenFirstInStack} navigateProps={navigateProps} handleMFAChange={handleMFAChange} handleErrorChange={handleErrorChange} shouldShowMFA={isMFAEnabled} shouldShowError={isErrorEnabled}  background={background} fontColor={fontColor} />
+              <AuthScreen iframeScreenStackSize={iframeScreenStackSize} isAuthScreenFirstInStack={isAuthScreenFirstInStack} theme={theme} navigateProps={navigateProps} handleMFAChange={handleMFAChange} handleErrorChange={handleErrorChange} shouldShowMFA={isMFAEnabled} shouldShowError={isErrorEnabled}  background={background} fontColor={fontColor} />
             </Route>
           </Switch>
         </div>
