@@ -29,14 +29,14 @@ function Connecting({shouldShowMFA, shouldShowError, handleErrorChange, handleMF
     let clientHeight = contentRef && contentRef.current && contentRef.current.clientHeight
     let clientWidth = contentRef && contentRef.current && contentRef.current.clientWidth
 
-    forwardMessageToMainAppFromPopup({
-      height: `${clientHeight}px`,
-      width: clientWidth > 860 ? '860px' : `${clientWidth}px`,
-      isConnectingScreen: true,
-      currentScreen: 'connecting',
-    })
-
     const invoke = async () => {
+      forwardMessageToMainAppFromPopup({
+        height: `${clientHeight}px`,
+        width: clientWidth > 860 ? '860px' : `${clientWidth}px`,
+        isConnectingScreen: true,
+        currentScreen: 'connecting',
+      })
+      
       await sleep()
 
       setIsFetching(false)
@@ -59,7 +59,7 @@ function Connecting({shouldShowMFA, shouldShowError, handleErrorChange, handleMF
     }
 
     invoke()
-  }, [history])
+  }, [handleErrorChange, handleMFAChange, history, shouldShowError, shouldShowMFA])
 
   const contentRef = useRef(null)
 
