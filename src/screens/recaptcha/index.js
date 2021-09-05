@@ -11,7 +11,7 @@ const Div = styled.div`
   padding: 0;
 `
 
-function Recaptcha({navigateProps, shouldDisplayHeader = false, shouldDisplayFooter = true, background, fontColor }) {
+function Recaptcha({navigateProps, shouldDisplayHeader = false, shouldDisplayIntuitFooter = false, background, fontColor }) {
   const btnRef = useRef(null)
 
   const [enablePrimaryButton, setEnablePrimaryButton] = useState(false)
@@ -21,13 +21,13 @@ function Recaptcha({navigateProps, shouldDisplayHeader = false, shouldDisplayFoo
   }
 
   useEffect(() => {
-    if (shouldDisplayFooter) {
+    if (shouldDisplayIntuitFooter) {
       forwardMessageToMainAppFromPopup({
         enablePrimaryButton,
         currentScreen: 'recaptcha',
       })
     }
-  }, [enablePrimaryButton, shouldDisplayFooter])
+  }, [enablePrimaryButton, shouldDisplayIntuitFooter])
 
   const contentRef = useRef(null)
 
@@ -69,7 +69,7 @@ function Recaptcha({navigateProps, shouldDisplayHeader = false, shouldDisplayFoo
           </ContainerLabel>
 
         </div>
-        {shouldDisplayFooter && <Footer background={background} fontColor={fontColor} iframeData={iframeData} currentScreen="recaptcha" screenToNavigate="connecting" />}
+        {!shouldDisplayIntuitFooter && <Footer background={background} fontColor={fontColor} iframeData={iframeData} currentScreen="recaptcha" screenToNavigate="connecting" />}
       </div>
     </Div>
   );

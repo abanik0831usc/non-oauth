@@ -20,7 +20,7 @@ function useQuery() {
 }
 
 
-function Connecting({shouldShowMFA, shouldShowError, handleErrorChange, handleMFAChange, shouldDisplayHeader = false, shouldDisplayFooter = true, background, fontColor }) {
+function Connecting({shouldShowMFA, shouldShowError, handleErrorChange, handleMFAChange, shouldDisplayHeader = false, shouldDisplayIntuitFooter = false, background, fontColor }) {
   const history = useHistory()
   const query = useQuery()
 

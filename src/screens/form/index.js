@@ -27,7 +27,7 @@ const Input = styled.input`
     }
 `
 
-function AuthScreen({iframeScreenStackSize, navigateProps, isAuthScreenFirstInStack, shouldShowMFA, background, fontColor, shouldShowError, handleErrorChange, handleMFAChange, theme, shouldDisplayFooter = true, shouldDisplayHeader = false }) {
+function AuthScreen({iframeScreenStackSize, navigateProps, isAuthScreenFirstInStack, shouldShowMFA, background, fontColor, shouldShowError, handleErrorChange, handleMFAChange, theme, shouldDisplayIntuitFooter = false, shouldDisplayHeader = false }) {
     const [navigate, setNavigate] = navigateProps
     const [btnsEnabled, setBtnsEnabled] = useState(false)
 
@@ -45,14 +45,7 @@ function AuthScreen({iframeScreenStackSize, navigateProps, isAuthScreenFirstInSt
         setPassword(event.target.value)
     }
 
-    if (shouldDisplayFooter) {
-        if (username && password && !iframeData.enablePrimaryButton) {
-            setIFrameData({ enablePrimaryButton: true })
-
-        } else if ((!username || !password) && iframeData.enablePrimaryButton) {
-           setIFrameData({ enablePrimaryButton: false })
-        }
-    } else {
+    if (shouldDisplayIntuitFooter) {
         if (username && password && !btnsEnabled) {
             setBtnsEnabled(true)
             forwardMessageToMainAppFromPopup({
@@ -66,7 +59,13 @@ function AuthScreen({iframeScreenStackSize, navigateProps, isAuthScreenFirstInSt
                 currentScreen: 'authentication',
             })
         }
+    } else {
+        if (username && password && !iframeData.enablePrimaryButton) {
+            setIFrameData({ enablePrimaryButton: true })
 
+        } else if ((!username || !password) && iframeData.enablePrimaryButton) {
+            setIFrameData({ enablePrimaryButton: false })
+        }
     }
 
     useEffect(() => {
@@ -74,7 +73,7 @@ function AuthScreen({iframeScreenStackSize, navigateProps, isAuthScreenFirstInSt
         let clientWidth = contentRef && contentRef.current && contentRef.current.clientWidth
 
         let message = {}
-        if (shouldDisplayFooter) {
+        if (shouldDisplayIntuitFooter) {
             message = {
                 height: `${clientHeight}px`,
                 width: clientWidth > 860 ? '860px' : `${clientWidth}px`,
@@ -122,7 +121,7 @@ function AuthScreen({iframeScreenStackSize, navigateProps, isAuthScreenFirstInSt
                         <Input borderColor={background} placeholder="enter your password" id="password" onChange={handlePasswordChange} value={password} type="password"/>
                    </form>
               </div>
-              {shouldDisplayFooter && <Footer isAuthScreenFirstInStack={isAuthScreenFirstInStack} background={background} fontColor={fontColor} iframeData={iframeData} currentScreen="authentication" screenToNavigate="recaptcha" />}
+              {!shouldDisplayIntuitFooter && <Footer isAuthScreenFirstInStack={isAuthScreenFirstInStack} background={background} fontColor={fontColor} iframeData={iframeData} currentScreen="authentication" screenToNavigate="recaptcha" />}
           </div>
       </Div>
     )

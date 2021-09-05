@@ -10,7 +10,7 @@ const Div = styled.div`
   padding: 0;
 `
 
-function Recaptcha({iframeScreenStackSize, navigateProps, shouldDisplayFooter = true, shouldDisplayHeader = false, background, fontColor, isAuthScreenFirstInStack }) {
+function Recaptcha({iframeScreenStackSize, navigateProps, shouldDisplayIntuitFooter = false, shouldDisplayHeader = false, background, fontColor, isAuthScreenFirstInStack }) {
 	const [navigate, setNavigate] = navigateProps
 	const history = useHistory()
 
@@ -36,7 +36,7 @@ function Recaptcha({iframeScreenStackSize, navigateProps, shouldDisplayFooter = 
 			description: 'invalid password',
 			otherDetails: 'share all other error reasons',
 			primaryButtonLabel: 'More Info',
-			shouldEnablePrimaryButton: false,
+			errorRemediable: false,
 			iframeScreenStackSize: 0,
 		}
 		forwardMessageToMainAppFromPopup(message)
@@ -52,7 +52,7 @@ function Recaptcha({iframeScreenStackSize, navigateProps, shouldDisplayFooter = 
 					<label>something went wrong!</label>
 
 				</div>
-				{shouldDisplayFooter && <Footer background={background} fontColor={fontColor} iframeData={iframeData} currentScreen="error" isAuthScreenFirstInStack={isAuthScreenFirstInStack} />}
+				{!shouldDisplayIntuitFooter && <Footer background={background} fontColor={fontColor} iframeData={iframeData} currentScreen="error" isAuthScreenFirstInStack={isAuthScreenFirstInStack} />}
 			</div>
 		</Div>
 	)

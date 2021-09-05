@@ -22,11 +22,11 @@ const Input = styled.input`
     }
 `
 
-function MFA({navigateProps, background, fontColor, shouldDisplayFooter = true, shouldDisplayHeader = false}) {
+function MFA({navigateProps, background, fontColor, shouldDisplayIntuitFooter = false, shouldDisplayHeader = false}) {
   const [iframeData, setIFrameData] = useState({ enablePrimaryButton: false, primaryButtonLabel: 'Connect' })
 
   useEffect(() => {
-    if (shouldDisplayFooter) {
+    if (shouldDisplayIntuitFooter) {
       forwardMessageToMainAppFromPopup({
         isConnectingScreen: false,
         currentScreen: 'mfa',
@@ -42,14 +42,7 @@ function MFA({navigateProps, background, fontColor, shouldDisplayFooter = true, 
 
   const [btnsEnabled, setBtnsEnabled] = useState(false)
 
-  if (shouldDisplayFooter) {
-    if (mfa && !iframeData.enablePrimaryButton) {
-      setIFrameData({ enablePrimaryButton: true })
-
-    } else if (!mfa&& iframeData.enablePrimaryButton) {
-      setIFrameData({ enablePrimaryButton: false })
-    }
-  } else {
+  if (shouldDisplayIntuitFooter) {
     if (mfa && !btnsEnabled) {
       setBtnsEnabled(true)
       forwardMessageToMainAppFromPopup({
@@ -62,6 +55,13 @@ function MFA({navigateProps, background, fontColor, shouldDisplayFooter = true, 
         enablePrimaryButton: false,
         currentScreen: 'mfa',
       })
+    }
+  } else {
+    if (mfa && !iframeData.enablePrimaryButton) {
+      setIFrameData({ enablePrimaryButton: true })
+
+    } else if (!mfa&& iframeData.enablePrimaryButton) {
+      setIFrameData({ enablePrimaryButton: false })
     }
   }
 
@@ -102,7 +102,7 @@ function MFA({navigateProps, background, fontColor, shouldDisplayFooter = true, 
             <Input borderColor={background} placeholder="Enter your username" id="mfa" onChange={handlemfachange} value={mfa} type="text" />
           </form>
         </div>
-        {shouldDisplayFooter && <Footer background={background} fontColor={fontColor} iframeData={iframeData} currentScreen="mfa" screenToNavigate="connecting" />}
+        {!shouldDisplayIntuitFooter && <Footer background={background} fontColor={fontColor} iframeData={iframeData} currentScreen="mfa" screenToNavigate="connecting" />}
       </div>
     </Div>
   )
