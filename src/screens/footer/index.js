@@ -34,7 +34,7 @@ export default function Footer({ background, fontColor, currentScreen, screenToN
 			return history.push('/')
 		}
 
-		if (!(currentScreen !== 'error' || currentScreen !== 'authentication')) {
+		if (!(currentScreen === 'error' || currentScreen === 'authentication')) {
 			history.goBack()
 		}
 	}
