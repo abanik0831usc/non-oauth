@@ -27,18 +27,18 @@ function App() {
 
   const params = new URLSearchParams(document.location.search.substring(1))
   const themeInfo = params.get('theme');
-  const isLaunchPoint = params.get('isAuthScreenFirstInStack') === 'true'
+  const isLaunchPoint = params.get('isAggregatorScreenFirstInWidgets') === 'true'
   const displayFooter = typeof params.get('shouldDisplayIntuitFooter') === 'string' ? params.get('shouldDisplayIntuitFooter') === 'true' : false
 
   const [theme, setTheme] = useState(themeInfo)
-  const [isAuthScreenFirstInStack, setIsAuthScreenFirstInStack] = useState(isLaunchPoint)
+  const [isAggregatorScreenFirstInWidgets, setIsAggregatorScreenFirstInWidgets] = useState(isLaunchPoint)
   const [shouldDisplayIntuitFooter] = useState(displayFooter)
 
 
   useEffect(() => {
-    receiveMessageFromMainAppToPopup(setNavigate, setTheme, setIsAuthScreenFirstInStack)
+    receiveMessageFromMainAppToPopup(setNavigate, setTheme, setIsAggregatorScreenFirstInWidgets)
     return () => removeIframeEventListener()
-  }, [isAuthScreenFirstInStack, theme, setTheme, setIsAuthScreenFirstInStack])
+  }, [isAggregatorScreenFirstInWidgets, theme, setTheme, setIsAggregatorScreenFirstInWidgets])
 
   const navigateProps = [navigate, setNavigate]
 
@@ -110,10 +110,10 @@ function App() {
               <Success shouldDisplayIntuitFooter={shouldDisplayIntuitFooter} iframeScreenStackSize={iframeScreenStackSize} navigateProps={navigateProps} background={background} theme={theme} fontColor={fontColor} />
             </Route>
             <Route path="/error">
-              <Error shouldDisplayIntuitFooter={shouldDisplayIntuitFooter} iframeScreenStackSize={iframeScreenStackSize} isAuthScreenFirstInStack={isAuthScreenFirstInStack} theme={theme} navigateProps={navigateProps} background={background} fontColor={fontColor} />
+              <Error shouldDisplayIntuitFooter={shouldDisplayIntuitFooter} iframeScreenStackSize={iframeScreenStackSize} isAggregatorScreenFirstInWidgets={isAggregatorScreenFirstInWidgets} theme={theme} navigateProps={navigateProps} background={background} fontColor={fontColor} />
             </Route>
             <Route path="/">
-              <AuthScreen shouldDisplayIntuitFooter={shouldDisplayIntuitFooter} iframeScreenStackSize={iframeScreenStackSize} isAuthScreenFirstInStack={isAuthScreenFirstInStack} theme={theme} navigateProps={navigateProps} handleMFAChange={handleMFAChange} handleErrorChange={handleErrorChange} shouldShowMFA={isMFAEnabled} shouldShowError={isErrorEnabled}  background={background} fontColor={fontColor} />
+              <AuthScreen shouldDisplayIntuitFooter={shouldDisplayIntuitFooter} iframeScreenStackSize={iframeScreenStackSize} isAggregatorScreenFirstInWidgets={isAggregatorScreenFirstInWidgets} theme={theme} navigateProps={navigateProps} handleMFAChange={handleMFAChange} handleErrorChange={handleErrorChange} shouldShowMFA={isMFAEnabled} shouldShowError={isErrorEnabled}  background={background} fontColor={fontColor} />
             </Route>
           </Switch>
         </div>

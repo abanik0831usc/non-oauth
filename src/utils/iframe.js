@@ -38,7 +38,7 @@ export const forwardMessageToMainAppFromPopup = (idxMessage) => {
     window.parent.postMessage({ idxMessage }, '*')
 }
 
-export const receiveMessageFromMainAppToPopup = (setState, setTheme, setIsAuthScreenFirstInStack) => {
+export const receiveMessageFromMainAppToPopup = (setState, setTheme, setIsAggregatorScreenFirstInWidgets) => {
     const eventMethod = window.addEventListener
       ? 'addEventListener'
       : 'attachEvent'
@@ -57,7 +57,7 @@ export const receiveMessageFromMainAppToPopup = (setState, setTheme, setIsAuthSc
     // Listen to message from intuit-fdp-auth-redirect-client
     event(
       messageEvent,
-      (e) => handlePostMessage(e, setState, setTheme, setIsAuthScreenFirstInStack),
+      (e) => handlePostMessage(e, setState, setTheme, setIsAggregatorScreenFirstInWidgets),
       false
     )
 }
@@ -73,11 +73,11 @@ export function removeIframeEventListener() {
     event(messageEvent, handlePostMessage, false)
 }
 // && e.origin !== 'http://localhost:3000'
-const handlePostMessage = (e, setState, setTheme, setIsAuthScreenFirstInStack) => {
+const handlePostMessage = (e, setState, setTheme, setIsAggregatorScreenFirstInWidgets) => {
     if (e.data.idxMessage) {
         const data = JSON.parse(e.data.idxMessage)
         data.navigate && setState(data.navigate)
         data.theme && setTheme(data.theme)
-        data.isAuthScreenFirstInStack && setIsAuthScreenFirstInStack(data.isAuthScreenFirstInStack)
+        data.isAggregatorScreenFirstInWidgets && setIsAggregatorScreenFirstInWidgets(data.isAggregatorScreenFirstInWidgets)
     }
 }

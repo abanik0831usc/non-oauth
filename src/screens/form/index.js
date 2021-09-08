@@ -27,7 +27,7 @@ const Input = styled.input`
     }
 `
 
-function AuthScreen({iframeScreenStackSize, navigateProps, isAuthScreenFirstInStack, shouldShowMFA, background, fontColor, shouldShowError, handleErrorChange, handleMFAChange, theme, shouldDisplayIntuitFooter = false, shouldDisplayHeader = false }) {
+function AuthScreen({iframeScreenStackSize, navigateProps, isAggregatorScreenFirstInWidgets, shouldShowMFA, background, fontColor, shouldShowError, handleErrorChange, handleMFAChange, theme, shouldDisplayIntuitFooter = false, shouldDisplayHeader = false }) {
     const [navigate, setNavigate] = navigateProps
     const [btnsEnabled, setBtnsEnabled] = useState(false)
 
@@ -125,7 +125,7 @@ function AuthScreen({iframeScreenStackSize, navigateProps, isAuthScreenFirstInSt
                         <Input borderColor={background} placeholder="enter your password" id="password" onChange={handlePasswordChange} value={password} type="password"/>
                    </form>
               </div>
-              {!shouldDisplayIntuitFooter && <Footer isAuthScreenFirstInStack={isAuthScreenFirstInStack} background={background} fontColor={fontColor} iframeData={iframeData} currentScreen="authentication" screenToNavigate="recaptcha" />}
+              {!shouldDisplayIntuitFooter && <Footer isAggregatorScreenFirstInWidgets={isAggregatorScreenFirstInWidgets} background={background} fontColor={fontColor} iframeData={iframeData} currentScreen="authentication" screenToNavigate="recaptcha" />}
           </div>
       </Div>
     )
