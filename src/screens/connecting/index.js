@@ -66,7 +66,7 @@ function Connecting({shouldShowMFA, shouldShowError, handleErrorChange, handleMF
   return (
     <Div ref={contentRef}>
       <div className="iframeWrapper" style={{ position: 'relative', width: '100%', border: 'solid 1px transparent', borderRadius: '2px' }}>
-        <div style={{ marginBottom: '110px' }}>
+        <div style={{ marginBottom: shouldDisplayIntuitFooter ? '0' : '110px' }}>
           <h4>Connecting Screen</h4>
           {isFetching ? <>
             <div className="spinner">

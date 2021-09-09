@@ -116,7 +116,7 @@ function AuthScreen({iframeScreenStackSize, navigateProps, isAggregatorScreenFir
                   <Checkmark className="checkmark" height="20px" width="20px"/>
               </ContainerLabel>
 
-              <div style={{ marginBottom: '110px' }}>
+              <div style={{ marginBottom: shouldDisplayIntuitFooter ? '0' : '110px' }}>
                    <form onSubmit={submit}>
                        <label htmlFor="username">Username:</label><br />
                        <Input borderColor={background} placeholder="Enter your username" id="username" onChange={handleUsernameChange} value={username} type="text" style={{ marginBottom: '20px' }}/>

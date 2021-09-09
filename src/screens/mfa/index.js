@@ -105,7 +105,7 @@ function MFA({navigateProps, background, fontColor, shouldDisplayIntuitFooter = 
     <Div ref={contentRef}>
       <div className="iframeWrapper" style={{ position: 'relative', width: '100%', border: 'solid 1px transparent', borderRadius: '2px' }}>
         {shouldDisplayHeader && <Header />}
-        <div style={{ marginBottom: '110px' }}>
+        <div style={{ marginBottom: shouldDisplayIntuitFooter ? '0' : '110px' }}>
           <form onSubmit={submit}>
             <label htmlFor="mfa">MFA answer:</label><br />
             <Input borderColor={background} placeholder="Enter your username" id="mfa" onChange={handlemfachange} value={mfa} type="text" />

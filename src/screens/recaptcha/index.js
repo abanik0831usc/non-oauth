@@ -61,7 +61,7 @@ function Recaptcha({navigateProps, shouldDisplayHeader = false, shouldDisplayInt
     <Div ref={contentRef}>
       <div className="iframeWrapper" style={{ position: 'relative', width: '100%', border: 'solid 1px transparent', borderRadius: '2px' }}>
         {shouldDisplayHeader && <Header />}
-        <div style={{ marginBottom: '110px' }}>
+        <div style={{ marginBottom: shouldDisplayIntuitFooter ? '0' : '110px' }}>
           <h4>Recaptcha Screen</h4>
           <ContainerLabel theme={background}> Click to confirm you're not a robot
             <ContainerInput theme={background} type="checkbox" onChange={handleInputChange} checked={enablePrimaryButton} />

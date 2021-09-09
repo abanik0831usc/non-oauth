@@ -46,7 +46,7 @@ function Recaptcha({iframeScreenStackSize, navigateProps, shouldDisplayIntuitFoo
 		<Div ref={contentRef}>
 			<div className="iframeWrapper" style={{ position: 'relative', width: '100%', border: 'solid 1px transparent', borderRadius: '2px' }}>
 				{shouldDisplayHeader && <Header />}
-				<div style={{ marginBottom: '110px' }}>
+				<div style={{ marginBottom: shouldDisplayIntuitFooter ? '0' : '110px' }}>
 					<h4>Error Screen</h4>
 
 					<label>something went wrong!</label>
