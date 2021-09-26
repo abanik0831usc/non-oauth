@@ -69,7 +69,7 @@ export default function Footer({ background, fontColor, currentScreen, screenToN
 				marginTop: 0,
 				borderTop: '1px #dcdcdc solid',
 				paddingTop: '20px',
-				width: '94%',
+				width: '100%',
 				position: 'absolute',
 				bottom: '0',
 				left: '50%',
