@@ -29,7 +29,6 @@ function App() {
   const themeInfo = params.get('theme');
   const isLaunchPoint = params.get('isAggregatorScreenFirstInWidgets') === 'true'
   const displayFooter = typeof params.get('shouldDisplayIntuitFooter') === 'string' ? params.get('shouldDisplayIntuitFooter') === 'true' : false
-  const width = params.get('clientWidth')
 
   const [theme, setTheme] = useState(themeInfo)
   const [isAggregatorScreenFirstInWidgets, setIsAggregatorScreenFirstInWidgets] = useState(isLaunchPoint)
@@ -91,10 +90,9 @@ function App() {
     setIsMFAEnabled(prevState => !prevState)
   }
 
-  console.log('width', width)
   return (
       <BrowserRouter>
-        <div style={{ width: width ? width : '860px' }}>
+        <div style={{ width: '100%' }}>
 
           {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
