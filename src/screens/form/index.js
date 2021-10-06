@@ -1,9 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react'
 import styled from "styled-components";
-import {Link} from "react-router-dom";
 import {forwardMessageToMainAppFromPopup} from "../../utils/iframe";
 import { useHistory } from "react-router-dom";
-import { Button } from "../../components/Button";
 import Footer from "../footer";
 import Header from "../Header";
 import { ContainerInput, ContainerLabel, Checkmark } from '../checkboxStyle'
@@ -69,26 +67,31 @@ function AuthScreen({iframeScreenStackSize, navigateProps, isAggregatorScreenFir
     }
 
     useEffect(() => {
-        let clientHeight = contentRef && contentRef.current && contentRef.current.clientHeight
-        let clientWidth = contentRef && contentRef.current && contentRef.current.clientWidth
+        setTimeout(() => {
+            const clientHeight = contentRef && contentRef.current && contentRef.current.clientHeight
+            const clientWidth = contentRef && contentRef.current && contentRef.current.clientWidth
 
-        let message = {}
-        if (shouldDisplayIntuitFooter) {
-            message = {
-                height: `${clientHeight}px`,
-                width: clientWidth > 860 ? '860px' : `${clientWidth}px`,
-                currentScreen: 'authentication',
+            console.log(clientHeight)
+            console.log(clientWidth)
+            console.log('i come here...')
+            let message = {}
+            if (shouldDisplayIntuitFooter) {
+                message = {
+                    height: `${clientHeight}px`,
+                    width: clientWidth > 860 ? '860px' : `${clientWidth}px`,
+                    currentScreen: 'authentication',
+                }
+            } else {
+                message = {
+                    height: `${clientHeight}px`,
+                    width: clientWidth > 860 ? '860px' : `${clientWidth}px`,
+                    currentScreen: 'authentication',
+                    iframeScreenStackSize,
+                }
             }
-        } else {
-            message = {
-                height: `${clientHeight}px`,
-                width: clientWidth > 860 ? '860px' : `${clientWidth}px`,
-                currentScreen: 'authentication',
-                iframeScreenStackSize,
-            }
-        }
 
-        forwardMessageToMainAppFromPopup(message)
+            forwardMessageToMainAppFromPopup(message)
+        }, 0)
     }, [])
 
     const history = useHistory()

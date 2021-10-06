@@ -24,6 +24,7 @@ export function addiframeEventListener() {
                 const logs = data.infoLog || 'no logs found'
                 const type = data.type || 'info'
                 // feLoggingOIL({ message: logs }, type)
+
             }
         },
         false
