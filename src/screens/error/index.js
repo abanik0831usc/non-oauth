@@ -40,7 +40,7 @@ function Recaptcha({url, iframeScreenStackSize, navigateProps, shouldDisplayIntu
 			iframeScreenStackSize: 0,
 		}
 		forwardMessageToMainAppFromPopup(message, url)
-	}, [])
+	}, [setIframeScreenStackSize, url])
 
 	return (
 		<Div ref={contentRef}>

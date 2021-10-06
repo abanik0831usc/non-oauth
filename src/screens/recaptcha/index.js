@@ -27,7 +27,7 @@ function Recaptcha({url, navigateProps, shouldDisplayHeader = false, shouldDispl
         currentScreen: 'recaptcha',
       }, url)
     }
-  }, [enablePrimaryButton, shouldDisplayIntuitFooter])
+  }, [enablePrimaryButton, shouldDisplayIntuitFooter, url])
 
   const contentRef = useRef(null)
 
@@ -42,7 +42,7 @@ function Recaptcha({url, navigateProps, shouldDisplayHeader = false, shouldDispl
     }
 
     forwardMessageToMainAppFromPopup(message, url)
-  }, [])
+  }, [url])
 
   const iframeData = {
     enablePrimaryButton,
@@ -56,7 +56,6 @@ function Recaptcha({url, navigateProps, shouldDisplayHeader = false, shouldDispl
     navigate === 'back' && history.goBack()
   }, [history, navigate, setNavigate])
 
-  // dcdcdc
   return (
     <Div ref={contentRef}>
       <div className="iframeWrapper" style={{ position: 'relative', width: '100%', border: 'solid 1px transparent', borderRadius: '2px' }}>

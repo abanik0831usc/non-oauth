@@ -82,7 +82,7 @@ function MFA({navigateProps, url, background, fontColor, shouldDisplayIntuitFoot
     }
 
     forwardMessageToMainAppFromPopup(message, url)
-  }, [])
+  }, [url])
 
   const [navigate, setNavigate] = navigateProps
   const history = useHistory()
