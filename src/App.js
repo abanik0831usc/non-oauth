@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import React, {useContext, useEffect, useRef, useState} from "react";
+import React, {useContext, useEffect, useLayoutEffect, useRef, useState} from "react";
 import {
   MemoryRouter as Router,
   BrowserRouter,
@@ -19,22 +19,25 @@ import {
   removeIframeEventListener
 } from "./utils/iframe";
 import ContextApp, {ContainerContext} from './Context'
+import {useUriInfo} from "./utils/singleton";
 
 function App() {
   const [navigate, setNavigate] = useState('')
 
   const [iframeScreenStackSize] = useContext(ContainerContext)
+  const [theme, setTheme] = useState('')
+  const [isAggregatorScreenFirstInWidgets, setIsAggregatorScreenFirstInWidgets] = useState(null)
+  const [shouldDisplayIntuitFooter, setShouldDisplayIntuitFooter] = useState(null)
+  const [originUrl, setOriginUrl] = useState(null)
 
-  const params = new URLSearchParams(document.location.search.substring(1))
-  const themeInfo = params.get('theme');
-  const isLaunchPoint = params.get('isAggregatorScreenFirstInWidgets') === 'true'
-  const url = params.get('url')
-  const displayFooter = typeof params.get('shouldDisplayIntuitFooter') === 'string' ? params.get('shouldDisplayIntuitFooter') === 'true' : false
+  const { themeInfo, isLaunchPoint, url, displayFooter } = useUriInfo()
 
-  const [theme, setTheme] = useState(themeInfo)
-  const [isAggregatorScreenFirstInWidgets, setIsAggregatorScreenFirstInWidgets] = useState(isLaunchPoint)
-  const [shouldDisplayIntuitFooter] = useState(displayFooter)
-
+  useLayoutEffect(() => {
+    setTheme(themeInfo)
+    setIsAggregatorScreenFirstInWidgets(isLaunchPoint)
+    setOriginUrl(url)
+    setShouldDisplayIntuitFooter(displayFooter)
+  }, [displayFooter, isLaunchPoint, themeInfo, url])
 
   useEffect(() => {
     receiveMessageFromMainAppToPopup(setNavigate, setTheme, setIsAggregatorScreenFirstInWidgets)
@@ -99,22 +102,22 @@ function App() {
             renders the first one that matches the current URL. */}
           <Switch>
             <Route path="/recaptcha">
-              <Recaptcha shouldDisplayIntuitFooter={shouldDisplayIntuitFooter} iframeScreenStackSize={iframeScreenStackSize} navigateProps={navigateProps} theme={theme} background={background} fontColor={fontColor} url={url} />
+              <Recaptcha shouldDisplayIntuitFooter={shouldDisplayIntuitFooter} iframeScreenStackSize={iframeScreenStackSize} navigateProps={navigateProps} theme={theme} background={background} fontColor={fontColor} url={originUrl} />
             </Route>
             <Route path="/mfa">
-              <MFA shouldDisplayIntuitFooter={shouldDisplayIntuitFooter} iframeScreenStackSize={iframeScreenStackSize} navigateProps={navigateProps} theme={theme} background={background} fontColor={fontColor} url={url} />
+              <MFA shouldDisplayIntuitFooter={shouldDisplayIntuitFooter} iframeScreenStackSize={iframeScreenStackSize} navigateProps={navigateProps} theme={theme} background={background} fontColor={fontColor} url={originUrl} />
             </Route>
             <Route path="/connecting">
-              <Connecting shouldDisplayIntuitFooter={shouldDisplayIntuitFooter} iframeScreenStackSize={iframeScreenStackSize} navigateProps={navigateProps} theme={theme} handleMFAChange={handleMFAChange} handleErrorChange={handleErrorChange} shouldShowMFA={isMFAEnabled} shouldShowError={isErrorEnabled} url={url} />
+              <Connecting shouldDisplayIntuitFooter={shouldDisplayIntuitFooter} iframeScreenStackSize={iframeScreenStackSize} navigateProps={navigateProps} theme={theme} handleMFAChange={handleMFAChange} handleErrorChange={handleErrorChange} shouldShowMFA={isMFAEnabled} shouldShowError={isErrorEnabled} url={originUrl} />
             </Route>
             <Route path="/success">
-              <Success shouldDisplayIntuitFooter={shouldDisplayIntuitFooter} iframeScreenStackSize={iframeScreenStackSize} navigateProps={navigateProps} background={background} theme={theme} fontColor={fontColor} url={url} />
+              <Success shouldDisplayIntuitFooter={shouldDisplayIntuitFooter} iframeScreenStackSize={iframeScreenStackSize} navigateProps={navigateProps} background={background} theme={theme} fontColor={fontColor} url={originUrl} />
             </Route>
             <Route path="/error">
-              <Error shouldDisplayIntuitFooter={shouldDisplayIntuitFooter} iframeScreenStackSize={iframeScreenStackSize} isAggregatorScreenFirstInWidgets={isAggregatorScreenFirstInWidgets} theme={theme} navigateProps={navigateProps} background={background} fontColor={fontColor}url={url} />
+              <Error shouldDisplayIntuitFooter={shouldDisplayIntuitFooter} iframeScreenStackSize={iframeScreenStackSize} isAggregatorScreenFirstInWidgets={isAggregatorScreenFirstInWidgets} theme={theme} navigateProps={navigateProps} background={background} fontColor={fontColor}url={originUrl} />
             </Route>
             <Route path="/">
-              <AuthScreen shouldDisplayIntuitFooter={shouldDisplayIntuitFooter} iframeScreenStackSize={iframeScreenStackSize} isAggregatorScreenFirstInWidgets={isAggregatorScreenFirstInWidgets} theme={theme} navigateProps={navigateProps} handleMFAChange={handleMFAChange} handleErrorChange={handleErrorChange} shouldShowMFA={isMFAEnabled} shouldShowError={isErrorEnabled} url={url} background={background} fontColor={fontColor} />
+              <AuthScreen shouldDisplayIntuitFooter={shouldDisplayIntuitFooter} iframeScreenStackSize={iframeScreenStackSize} isAggregatorScreenFirstInWidgets={isAggregatorScreenFirstInWidgets} theme={theme} navigateProps={navigateProps} handleMFAChange={handleMFAChange} handleErrorChange={handleErrorChange} shouldShowMFA={isMFAEnabled} shouldShowError={isErrorEnabled} url={originUrl} background={background} fontColor={fontColor} />
             </Route>
           </Switch>
         </div>
