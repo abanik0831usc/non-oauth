@@ -94,8 +94,6 @@ function App() {
     setIsMFAEnabled(prevState => !prevState)
   }
 
-  console.log('origin url: ', originUrl, url)
-  console.log('origin theme: ', theme, themeInfo)
   return (
       <BrowserRouter>
         <div style={{ width: '100%' }}>

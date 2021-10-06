@@ -26,7 +26,6 @@ const Input = styled.input`
 `
 
 function AuthScreen({url, iframeScreenStackSize, navigateProps, isAggregatorScreenFirstInWidgets, shouldShowMFA, background, fontColor, shouldShowError, handleErrorChange, handleMFAChange, theme, shouldDisplayIntuitFooter = false, shouldDisplayHeader = false }) {
-    console.log('okies url: ', url)
     const [navigate, setNavigate] = navigateProps
     const [btnsEnabled, setBtnsEnabled] = useState(false)
 
@@ -88,7 +87,6 @@ function AuthScreen({url, iframeScreenStackSize, navigateProps, isAggregatorScre
                 }
             }
 
-            console.log('forward message?')
             forwardMessageToMainAppFromPopup(message, url)
         }, 0)
     }, [iframeScreenStackSize, shouldDisplayIntuitFooter, url])

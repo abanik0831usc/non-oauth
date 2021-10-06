@@ -11,10 +11,6 @@ const useUriImpl = () => {
 	const url = params.get('url')
 	const displayFooter = typeof params.get('shouldDisplayIntuitFooter') === 'string' ? params.get('shouldDisplayIntuitFooter') === 'true' : false
 
-	console.log('jefd:: ', themeInfo,
-		isLaunchPoint,
-		url,
-		displayFooter,)
 	return {
 		themeInfo,
 		isLaunchPoint,

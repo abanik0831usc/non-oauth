@@ -88,7 +88,6 @@ function MFA({navigateProps, url, background, fontColor, shouldDisplayIntuitFoot
   const history = useHistory()
 
   useEffect(() => {
-    console.log('surely not here...')
     setNavigate(false)
     navigate === 'forward' && history.push({
       state: { mfa: true },
