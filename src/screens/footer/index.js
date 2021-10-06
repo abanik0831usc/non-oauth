@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { ContainerContext } from "../../Context";
 import {forwardMessageToMainAppFromPopup} from "../../utils/iframe";
 
-export default function Footer({ background, fontColor, currentScreen, screenToNavigate, iframeData, isAggregatorScreenFirstInWidgets }) {
+export default function Footer({ url, background, fontColor, currentScreen, screenToNavigate, iframeData, isAggregatorScreenFirstInWidgets }) {
 	const history = useHistory()
 
 	const [iframeScreenStackSize, setIframeScreenStackSize] = useContext(ContainerContext)
@@ -28,7 +28,7 @@ export default function Footer({ background, fontColor, currentScreen, screenToN
 			iframeScreenStackSize,
 		}
 
-		forwardMessageToMainAppFromPopup(idxMessage)
+		forwardMessageToMainAppFromPopup(idxMessage, url)
 
 		if (currentScreen === 'mfa') {
 			return history.push('/')
@@ -53,7 +53,7 @@ export default function Footer({ background, fontColor, currentScreen, screenToN
 		}
 
 		// iframeScreenStackSize
-		forwardMessageToMainAppFromPopup(idxMessage)
+		forwardMessageToMainAppFromPopup(idxMessage, url)
 
 		// console.log('data from Intuit to aggregator on primary(continue) button click: ', idxMessage)
 		// postIframeMessageToAggregator(idxMessage)

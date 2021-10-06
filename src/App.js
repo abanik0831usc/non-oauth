@@ -28,6 +28,7 @@ function App() {
   const params = new URLSearchParams(document.location.search.substring(1))
   const themeInfo = params.get('theme');
   const isLaunchPoint = params.get('isAggregatorScreenFirstInWidgets') === 'true'
+  const url = params.get('url')
   const displayFooter = typeof params.get('shouldDisplayIntuitFooter') === 'string' ? params.get('shouldDisplayIntuitFooter') === 'true' : false
 
   const [theme, setTheme] = useState(themeInfo)
@@ -98,22 +99,22 @@ function App() {
             renders the first one that matches the current URL. */}
           <Switch>
             <Route path="/recaptcha">
-              <Recaptcha shouldDisplayIntuitFooter={shouldDisplayIntuitFooter} iframeScreenStackSize={iframeScreenStackSize} navigateProps={navigateProps} theme={theme} background={background} fontColor={fontColor} />
+              <Recaptcha shouldDisplayIntuitFooter={shouldDisplayIntuitFooter} iframeScreenStackSize={iframeScreenStackSize} navigateProps={navigateProps} theme={theme} background={background} fontColor={fontColor} url={url} />
             </Route>
             <Route path="/mfa">
-              <MFA shouldDisplayIntuitFooter={shouldDisplayIntuitFooter} iframeScreenStackSize={iframeScreenStackSize} navigateProps={navigateProps} theme={theme} background={background} fontColor={fontColor} />
+              <MFA shouldDisplayIntuitFooter={shouldDisplayIntuitFooter} iframeScreenStackSize={iframeScreenStackSize} navigateProps={navigateProps} theme={theme} background={background} fontColor={fontColor} url={url} />
             </Route>
             <Route path="/connecting">
-              <Connecting shouldDisplayIntuitFooter={shouldDisplayIntuitFooter} iframeScreenStackSize={iframeScreenStackSize} navigateProps={navigateProps} theme={theme} handleMFAChange={handleMFAChange} handleErrorChange={handleErrorChange} shouldShowMFA={isMFAEnabled} shouldShowError={isErrorEnabled} />
+              <Connecting shouldDisplayIntuitFooter={shouldDisplayIntuitFooter} iframeScreenStackSize={iframeScreenStackSize} navigateProps={navigateProps} theme={theme} handleMFAChange={handleMFAChange} handleErrorChange={handleErrorChange} shouldShowMFA={isMFAEnabled} shouldShowError={isErrorEnabled} url={url} />
             </Route>
             <Route path="/success">
-              <Success shouldDisplayIntuitFooter={shouldDisplayIntuitFooter} iframeScreenStackSize={iframeScreenStackSize} navigateProps={navigateProps} background={background} theme={theme} fontColor={fontColor} />
+              <Success shouldDisplayIntuitFooter={shouldDisplayIntuitFooter} iframeScreenStackSize={iframeScreenStackSize} navigateProps={navigateProps} background={background} theme={theme} fontColor={fontColor} url={url} />
             </Route>
             <Route path="/error">
-              <Error shouldDisplayIntuitFooter={shouldDisplayIntuitFooter} iframeScreenStackSize={iframeScreenStackSize} isAggregatorScreenFirstInWidgets={isAggregatorScreenFirstInWidgets} theme={theme} navigateProps={navigateProps} background={background} fontColor={fontColor} />
+              <Error shouldDisplayIntuitFooter={shouldDisplayIntuitFooter} iframeScreenStackSize={iframeScreenStackSize} isAggregatorScreenFirstInWidgets={isAggregatorScreenFirstInWidgets} theme={theme} navigateProps={navigateProps} background={background} fontColor={fontColor}url={url} />
             </Route>
             <Route path="/">
-              <AuthScreen shouldDisplayIntuitFooter={shouldDisplayIntuitFooter} iframeScreenStackSize={iframeScreenStackSize} isAggregatorScreenFirstInWidgets={isAggregatorScreenFirstInWidgets} theme={theme} navigateProps={navigateProps} handleMFAChange={handleMFAChange} handleErrorChange={handleErrorChange} shouldShowMFA={isMFAEnabled} shouldShowError={isErrorEnabled}  background={background} fontColor={fontColor} />
+              <AuthScreen shouldDisplayIntuitFooter={shouldDisplayIntuitFooter} iframeScreenStackSize={iframeScreenStackSize} isAggregatorScreenFirstInWidgets={isAggregatorScreenFirstInWidgets} theme={theme} navigateProps={navigateProps} handleMFAChange={handleMFAChange} handleErrorChange={handleErrorChange} shouldShowMFA={isMFAEnabled} shouldShowError={isErrorEnabled} url={url} background={background} fontColor={fontColor} />
             </Route>
           </Switch>
         </div>

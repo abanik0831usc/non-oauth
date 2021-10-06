@@ -10,7 +10,7 @@ const Div = styled.div`
   padding: 0;
 `
 
-function Recaptcha({iframeScreenStackSize, navigateProps, shouldDisplayIntuitFooter = false, shouldDisplayHeader = false, background, fontColor, isAggregatorScreenFirstInWidgets }) {
+function Recaptcha({url, iframeScreenStackSize, navigateProps, shouldDisplayIntuitFooter = false, shouldDisplayHeader = false, background, fontColor, isAggregatorScreenFirstInWidgets }) {
 	const [navigate, setNavigate] = navigateProps
 	const history = useHistory()
 
@@ -39,7 +39,7 @@ function Recaptcha({iframeScreenStackSize, navigateProps, shouldDisplayIntuitFoo
 			errorRemediable: false,
 			iframeScreenStackSize: 0,
 		}
-		forwardMessageToMainAppFromPopup(message)
+		forwardMessageToMainAppFromPopup(message, url)
 	}, [])
 
 	return (
@@ -52,7 +52,7 @@ function Recaptcha({iframeScreenStackSize, navigateProps, shouldDisplayIntuitFoo
 					<label>something went wrong!</label>
 
 				</div>
-				{!shouldDisplayIntuitFooter && <Footer background={background} fontColor={fontColor} iframeData={iframeData} currentScreen="error" isAggregatorScreenFirstInWidgets={isAggregatorScreenFirstInWidgets} />}
+				{!shouldDisplayIntuitFooter && <Footer url={url} background={background} fontColor={fontColor} iframeData={iframeData} currentScreen="error" isAggregatorScreenFirstInWidgets={isAggregatorScreenFirstInWidgets} />}
 			</div>
 		</Div>
 	)

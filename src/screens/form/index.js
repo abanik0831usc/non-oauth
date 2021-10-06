@@ -25,7 +25,7 @@ const Input = styled.input`
     }
 `
 
-function AuthScreen({iframeScreenStackSize, navigateProps, isAggregatorScreenFirstInWidgets, shouldShowMFA, background, fontColor, shouldShowError, handleErrorChange, handleMFAChange, theme, shouldDisplayIntuitFooter = false, shouldDisplayHeader = false }) {
+function AuthScreen({url, iframeScreenStackSize, navigateProps, isAggregatorScreenFirstInWidgets, shouldShowMFA, background, fontColor, shouldShowError, handleErrorChange, handleMFAChange, theme, shouldDisplayIntuitFooter = false, shouldDisplayHeader = false }) {
     const [navigate, setNavigate] = navigateProps
     const [btnsEnabled, setBtnsEnabled] = useState(false)
 
@@ -49,13 +49,13 @@ function AuthScreen({iframeScreenStackSize, navigateProps, isAggregatorScreenFir
             forwardMessageToMainAppFromPopup({
                 enablePrimaryButton: true,
                 currentScreen: 'authentication',
-            })
+            }, url)
         } else if ((!username || !password) && btnsEnabled) {
             setBtnsEnabled(false)
             forwardMessageToMainAppFromPopup({
                 enablePrimaryButton: false,
                 currentScreen: 'authentication',
-            })
+            }, url)
         }
     } else {
         if (username && password && !iframeData.enablePrimaryButton) {
@@ -71,9 +71,6 @@ function AuthScreen({iframeScreenStackSize, navigateProps, isAggregatorScreenFir
             const clientHeight = contentRef && contentRef.current && contentRef.current.clientHeight
             const clientWidth = contentRef && contentRef.current && contentRef.current.clientWidth
 
-            console.log(clientHeight)
-            console.log(clientWidth)
-            console.log('i come here...')
             let message = {}
             if (shouldDisplayIntuitFooter) {
                 message = {
@@ -90,7 +87,7 @@ function AuthScreen({iframeScreenStackSize, navigateProps, isAggregatorScreenFir
                 }
             }
 
-            forwardMessageToMainAppFromPopup(message)
+            forwardMessageToMainAppFromPopup(message, url)
         }, 0)
     }, [])
 
@@ -128,7 +125,7 @@ function AuthScreen({iframeScreenStackSize, navigateProps, isAggregatorScreenFir
                         <Input borderColor={background} placeholder="enter your password" id="password" onChange={handlePasswordChange} value={password} type="password"/>
                    </form>
               </div>
-              {!shouldDisplayIntuitFooter && <Footer isAggregatorScreenFirstInWidgets={isAggregatorScreenFirstInWidgets} background={background} fontColor={fontColor} iframeData={iframeData} currentScreen="authentication" screenToNavigate="recaptcha" />}
+              {!shouldDisplayIntuitFooter && <Footer url={url} isAggregatorScreenFirstInWidgets={isAggregatorScreenFirstInWidgets} background={background} fontColor={fontColor} iframeData={iframeData} currentScreen="authentication" screenToNavigate="recaptcha" />}
           </div>
       </Div>
     )

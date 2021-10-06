@@ -22,7 +22,7 @@ const Input = styled.input`
     }
 `
 
-function MFA({navigateProps, background, fontColor, shouldDisplayIntuitFooter = false, shouldDisplayHeader = false}) {
+function MFA({navigateProps, url, background, fontColor, shouldDisplayIntuitFooter = false, shouldDisplayHeader = false}) {
   const [iframeData, setIFrameData] = useState({ enablePrimaryButton: false, primaryButtonLabel: 'Connect' })
 
   useEffect(() => {
@@ -30,7 +30,7 @@ function MFA({navigateProps, background, fontColor, shouldDisplayIntuitFooter = 
       forwardMessageToMainAppFromPopup({
         isConnectingScreen: false,
         currentScreen: 'mfa',
-      })
+      }, url)
     }
   }, [])
 
@@ -48,13 +48,13 @@ function MFA({navigateProps, background, fontColor, shouldDisplayIntuitFooter = 
       forwardMessageToMainAppFromPopup({
         enablePrimaryButton: true,
         currentScreen: 'mfa',
-      })
+      }, url)
     } else if (!mfa && btnsEnabled) {
       setBtnsEnabled(false)
       forwardMessageToMainAppFromPopup({
         enablePrimaryButton: false,
         currentScreen: 'mfa',
-      })
+      }, url)
     }
   } else {
     if (mfa && !iframeData.enablePrimaryButton) {
@@ -81,7 +81,7 @@ function MFA({navigateProps, background, fontColor, shouldDisplayIntuitFooter = 
       currentScreen: 'mfa',
     }
 
-    forwardMessageToMainAppFromPopup(message)
+    forwardMessageToMainAppFromPopup(message, url)
   }, [])
 
   const [navigate, setNavigate] = navigateProps
@@ -111,7 +111,7 @@ function MFA({navigateProps, background, fontColor, shouldDisplayIntuitFooter = 
             <Input borderColor={background} placeholder="Enter your username" id="mfa" onChange={handlemfachange} value={mfa} type="text" />
           </form>
         </div>
-        {!shouldDisplayIntuitFooter && <Footer background={background} fontColor={fontColor} iframeData={iframeData} currentScreen="mfa" screenToNavigate="connecting" />}
+        {!shouldDisplayIntuitFooter && <Footer url={url} background={background} fontColor={fontColor} iframeData={iframeData} currentScreen="mfa" screenToNavigate="connecting" />}
       </div>
     </Div>
   )

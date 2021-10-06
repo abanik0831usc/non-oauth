@@ -31,12 +31,12 @@ export function addiframeEventListener() {
     )
 }
 
-export const forwardMessageToMainAppFromPopup = (idxMessage) => {
+export const forwardMessageToMainAppFromPopup = (idxMessage, url) => {
     if (typeof message !== 'string') {
         idxMessage = JSON.stringify(idxMessage);
     }
 
-    window.parent.postMessage({ idxMessage }, '*')
+    window.parent.postMessage({ idxMessage }, url)
 }
 
 export const receiveMessageFromMainAppToPopup = (setState, setTheme, setIsAggregatorScreenFirstInWidgets) => {
