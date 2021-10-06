@@ -59,11 +59,21 @@ function AuthScreen({url, iframeScreenStackSize, navigateProps, isAggregatorScre
         }
     } else {
         if (username && password && !iframeData.enablePrimaryButton) {
-            setIFrameData({ enablePrimaryButton: true })
+            setIFrameData({enablePrimaryButton: true})
 
         } else if ((!username || !password) && iframeData.enablePrimaryButton) {
-            setIFrameData({ enablePrimaryButton: false })
+            setIFrameData({enablePrimaryButton: false})
         }
+    }
+
+    const history = useHistory()
+    useEffect(() => {
+        setNavigate('')
+        navigate === 'forward' && history.push('/recaptcha')
+    }, [history, navigate, setNavigate])
+
+    const submit = (event) => {
+        event.preventDefault()
     }
 
     useEffect(() => {
@@ -88,46 +98,38 @@ function AuthScreen({url, iframeScreenStackSize, navigateProps, isAggregatorScre
             }
 
             forwardMessageToMainAppFromPopup(message, url)
-        }, 0)
+        }, 100)
     }, [iframeScreenStackSize, shouldDisplayIntuitFooter, url])
 
-    const history = useHistory()
-    useEffect(() => {
-        setNavigate('')
-        navigate === 'forward' && history.push('/recaptcha')
-    }, [history, navigate, setNavigate])
-
-    const submit = (event) => {
-        event.preventDefault()
-    }
-
     return (
-      <Div ref={contentRef}>
-          <div className="iframeWrapper" style={{ position: 'relative', width: '100%', border: 'solid 1px transparent', borderRadius: '2px' }}>
-              {shouldDisplayHeader && <Header />}
+      <div ref={contentRef}>
+          <Div>
+              <div className="iframeWrapper" style={{ position: 'relative', width: '100%', border: 'solid 1px transparent', borderRadius: '2px' }}>
+                  {shouldDisplayHeader && <Header />}
 
-              <ContainerLabel theme={background} fontSize="12px" left="5px" top="1px">Enable MFA
-                  <ContainerInput theme={background} type="checkbox" onChange={handleMFAChange} checked={shouldShowMFA} />
-                  <Checkmark className="checkmark" height="20px" width="20px" />
-              </ContainerLabel>
+                  <ContainerLabel theme={background} fontSize="12px" left="5px" top="1px">Enable MFA
+                      <ContainerInput theme={background} type="checkbox" onChange={handleMFAChange} checked={shouldShowMFA} />
+                      <Checkmark className="checkmark" height="20px" width="20px" />
+                  </ContainerLabel>
 
-              <ContainerLabel theme={background} fontSize="12px" left="5px" top="1px">Enable Error
-                  <ContainerInput theme={background} type="checkbox" onChange={handleErrorChange} checked={shouldShowError} />
-                  <Checkmark className="checkmark" height="20px" width="20px"/>
-              </ContainerLabel>
+                  <ContainerLabel theme={background} fontSize="12px" left="5px" top="1px">Enable Error
+                      <ContainerInput theme={background} type="checkbox" onChange={handleErrorChange} checked={shouldShowError} />
+                      <Checkmark className="checkmark" height="20px" width="20px"/>
+                  </ContainerLabel>
 
-              <div style={{ marginBottom: shouldDisplayIntuitFooter ? '0' : '110px' }}>
-                   <form onSubmit={submit}>
-                       <label htmlFor="username">Username:</label><br />
-                       <Input borderColor={background} placeholder="Enter your username" id="username" onChange={handleUsernameChange} value={username} type="text" style={{ marginBottom: '20px' }}/>
-                       <br />
-                       <label htmlFor="password">Password:</label><br />
-                        <Input borderColor={background} placeholder="enter your password" id="password" onChange={handlePasswordChange} value={password} type="password"/>
-                   </form>
+                  <div style={{ marginBottom: shouldDisplayIntuitFooter ? '0' : '110px' }}>
+                      <form onSubmit={submit}>
+                          <label htmlFor="username">Username:</label><br />
+                          <Input borderColor={background} placeholder="Enter your username" id="username" onChange={handleUsernameChange} value={username} type="text" style={{ marginBottom: '20px' }}/>
+                          <br />
+                          <label htmlFor="password">Password:</label><br />
+                          <Input borderColor={background} placeholder="enter your password" id="password" onChange={handlePasswordChange} value={password} type="password"/>
+                      </form>
+                  </div>
+                  {!shouldDisplayIntuitFooter && <Footer url={url} isAggregatorScreenFirstInWidgets={isAggregatorScreenFirstInWidgets} background={background} fontColor={fontColor} iframeData={iframeData} currentScreen="authentication" screenToNavigate="recaptcha" />}
               </div>
-              {!shouldDisplayIntuitFooter && <Footer url={url} isAggregatorScreenFirstInWidgets={isAggregatorScreenFirstInWidgets} background={background} fontColor={fontColor} iframeData={iframeData} currentScreen="authentication" screenToNavigate="recaptcha" />}
-          </div>
-      </Div>
+          </Div>
+      </div>
     )
 }
 
