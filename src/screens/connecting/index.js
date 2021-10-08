@@ -39,6 +39,7 @@ function Connecting({url, shouldShowMFA, shouldShowError, handleErrorChange, han
       await sleep()
 
       setIsFetching(false)
+
       if (shouldShowMFA) {
         handleMFAChange()
         return history.push('/mfa')
@@ -58,7 +59,7 @@ function Connecting({url, shouldShowMFA, shouldShowError, handleErrorChange, han
     }
 
     invoke()
-  }, [handleErrorChange, handleMFAChange, history, shouldShowError, shouldShowMFA, url])
+  }, [history, url])
 
   const contentRef = useRef(null)
 
