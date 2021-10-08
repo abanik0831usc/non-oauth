@@ -24,7 +24,7 @@ export default function Footer({ url, background, fontColor, currentScreen, scre
 
 		const idxMessage = {
 			currentScreen,
-			btnClicked: 'back',
+			navigate: 'back',
 			iframeScreenStackSize,
 		}
 
@@ -43,7 +43,7 @@ export default function Footer({ url, background, fontColor, currentScreen, scre
 		const idxMessage = {
 			screenToNavigate,
 			currentScreen,
-			btnClicked: 'forward',
+			navigate: 'forward',
 		}
 
 		if (screenToNavigate === 'connecting') {
