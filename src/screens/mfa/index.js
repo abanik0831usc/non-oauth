@@ -74,9 +74,11 @@ function MFA({navigateProps, url, background, fontColor, shouldDisplayIntuitFoot
     const message = {
       height: `${clientHeight}px`,
       width: clientWidth > 860 ? '860px' : `${clientWidth}px`,
-      code: '185',
-      description: 'additional authentication details required',
-      otherDetails: 'share all other error reasons',
+      error: {
+        code: '185',
+        description: 'additional authentication details required',
+        otherDetails: 'share all other error reasons',
+      },
       primaryButtonLabel: 'Connect',
       currentScreen: 'mfa',
     }

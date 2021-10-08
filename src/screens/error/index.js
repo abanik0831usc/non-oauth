@@ -32,11 +32,13 @@ function Recaptcha({url, iframeScreenStackSize, navigateProps, shouldDisplayIntu
 			width: clientWidth > 860 ? '860px' : `${clientWidth}px`,
 			currentScreen: 'error',
 			enablePrimaryButton: true,
-			code: '103',
-			description: 'invalid password',
-			otherDetails: 'share all other error reasons',
-			primaryButtonLabel: 'More Info',
-			errorRemediable: false,
+			error: {
+				code: '103',
+				description: 'invalid password',
+				otherDetails: 'share all other error reasons',
+				primaryButtonLabel: 'More Info',
+				errorRemediable: false,
+			},
 			iframeScreenStackSize: 0,
 		}
 		forwardMessageToMainAppFromPopup(message, url)
