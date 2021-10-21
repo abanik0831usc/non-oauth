@@ -25,7 +25,6 @@ export default function Footer({ url, background, fontColor, currentScreen, scre
 		const idxMessage = {
 			currentScreen,
 			navigate: 'back',
-			iframeScreenStackSize,
 		}
 
 		forwardMessageToMainAppFromPopup(idxMessage, url)
