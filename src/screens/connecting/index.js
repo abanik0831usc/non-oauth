@@ -62,9 +62,9 @@ function Connecting({url, shouldShowMFA, shouldShowError, handleErrorChange, han
   }, [history, url])
 
   useEffect(() => {
-    if (!isFetching) {
-      history.push('/success')
-    }
+    // if (!isFetching) {
+    //   history.push('/success')
+    // }
   }, [isFetching, setIsFetching])
 
 
