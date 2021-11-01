@@ -61,6 +61,13 @@ function Connecting({url, shouldShowMFA, shouldShowError, handleErrorChange, han
     invoke()
   }, [history, url])
 
+  useEffect(() => {
+    if (!isFetching) {
+      history.push('/success')
+    }
+  }, [isFetching, setIsFetching])
+
+
   const contentRef = useRef(null)
 
   return (

@@ -9,7 +9,7 @@ class Success extends Component {
     render() {
         return (
             <Div>
-                <label><p>Successfully connected</p></label>
+                <label style={{ display: "flex", justifyContent: 'center'}}>successfully connected to bank & data sent to IDX</label>
             </Div>
         );
     }
