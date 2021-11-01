@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Div = styled.div`
   padding: 0;
-  height: 100vh;
+  height: 360px;
 `
 
 class Success extends Component {
