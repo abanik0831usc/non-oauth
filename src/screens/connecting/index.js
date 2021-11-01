@@ -75,15 +75,11 @@ function Connecting({url, shouldShowMFA, shouldShowError, handleErrorChange, han
       <div className="iframeWrapper" style={{ position: 'relative', width: '100%', border: 'solid 1px transparent', borderRadius: '2px' }}>
         <div style={{ marginBottom: shouldDisplayIntuitFooter ? '0' : '110px' }}>
           <h4>Connecting Screen</h4>
-          {isFetching ? <>
             <div className="spinner">
               <div className="dot1" />
               <div className="dot2"/>
             </div>
             <label style={{ display: "flex", justifyContent: 'center'}}>Connecting to bank...</label>
-          </> :
-            <label style={{ display: "flex", justifyContent: 'center'}}>successfully connected to bank & data sent to IDX</label>
-          }
         </div>
       </div>
     </Div>
