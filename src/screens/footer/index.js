@@ -12,8 +12,6 @@ export default function Footer({ url, background, fontColor, currentScreen, scre
 	const shouldShowBackBtn = !(isAggregatorScreenFirstInWidgets && (currentScreen === 'authentication' || currentScreen === 'error'))
 
 	const handleCancelClick = () => {
-		setIframeScreenStackSize(0)
-
 		const idxMessage = {
 			currentScreen,
 			navigate: 'cancel',
