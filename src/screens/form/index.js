@@ -25,7 +25,7 @@ const Input = styled.input`
     }
 `
 
-function AuthScreen({url, iframeScreenStackSize, navigateProps, isAggregatorScreenFirstInWidgets, shouldShowMFA, background, fontColor, shouldShowError, handleErrorChange, handleMFAChange, theme, shouldDisplayIntuitFooter = false, shouldDisplayHeader = false }) {
+function AuthScreen({url, iframeScreenStackSize, navigateProps, isAggregatorScreenFirstInWidgets, shouldShowMFA, background, fontColor, shouldShowError, handleErrorChange, handleMFAChange, theme, shouldDisplayIntuitFooter = false, shouldDisplayHeader = false, shouldEnableResponse =false, handleResponseChange, handleCancelButton, shouldShowCancelButton = false }) {
     const [navigate, setNavigate] = navigateProps
     const [btnsEnabled, setBtnsEnabled] = useState(false)
 
@@ -117,6 +117,16 @@ function AuthScreen({url, iframeScreenStackSize, navigateProps, isAggregatorScre
                       <Checkmark className="checkmark" height="20px" width="20px"/>
                   </ContainerLabel>
 
+                  <ContainerLabel theme={background} fontSize="12px" left="5px" top="1px">Enable String response
+                      <ContainerInput theme={background} type="checkbox" onChange={handleResponseChange} checked={shouldEnableResponse} />
+                      <Checkmark className="checkmark" height="20px" width="20px" />
+                  </ContainerLabel>
+
+                  <ContainerLabel theme={background} fontSize="12px" left="5px" top="1px">Show cancel button
+                      <ContainerInput theme={background} type="checkbox" onChange={handleCancelButton} checked={shouldShowCancelButton} />
+                      <Checkmark className="checkmark" height="20px" width="20px" />
+                  </ContainerLabel>
+
                   <div style={{ marginBottom: shouldDisplayIntuitFooter ? '0' : '110px' }}>
                       <form onSubmit={submit}>
                           <label htmlFor="username">Username:</label><br />
@@ -126,7 +136,7 @@ function AuthScreen({url, iframeScreenStackSize, navigateProps, isAggregatorScre
                           <Input borderColor={background} placeholder="enter your password" id="password" onChange={handlePasswordChange} value={password} type="password"/>
                       </form>
                   </div>
-                  {!shouldDisplayIntuitFooter && <Footer url={url} isAggregatorScreenFirstInWidgets={isAggregatorScreenFirstInWidgets} background={background} fontColor={fontColor} iframeData={iframeData} currentScreen="authentication" screenToNavigate="recaptcha" />}
+                  {!shouldDisplayIntuitFooter && <Footer url={url} isAggregatorScreenFirstInWidgets={isAggregatorScreenFirstInWidgets} background={background} fontColor={fontColor} iframeData={iframeData} currentScreen="authentication" screenToNavigate="recaptcha" shouldShowCancelButton={shouldShowCancelButton}/>}
               </div>
           </Div>
       </div>
