@@ -4,12 +4,23 @@ import { useHistory } from "react-router-dom";
 import { ContainerContext } from "../../Context";
 import {forwardMessageToMainAppFromPopup} from "../../utils/iframe";
 
-export default function Footer({ url, background, fontColor, currentScreen, screenToNavigate, iframeData, isAggregatorScreenFirstInWidgets }) {
+export default function Footer({ url, background, fontColor, currentScreen, screenToNavigate, iframeData, isAggregatorScreenFirstInWidgets, shouldShowCancelButton }) {
 	const history = useHistory()
 
 	const [iframeScreenStackSize, setIframeScreenStackSize] = useContext(ContainerContext)
 
 	const shouldShowBackBtn = !(isAggregatorScreenFirstInWidgets && (currentScreen === 'authentication' || currentScreen === 'error'))
+
+	const handleCancelClick = () => {
+		setIframeScreenStackSize(0)
+
+		const idxMessage = {
+			currentScreen,
+			navigate: 'cancel',
+			iframeScreenStackSize,
+		}
+		forwardMessageToMainAppFromPopup(idxMessage, url)
+	}
 
 	const handleBackClick = () => {
 		let stackSize
@@ -76,6 +87,7 @@ export default function Footer({ url, background, fontColor, currentScreen, scre
 				transform: 'translate(-50%, -50%)'
 			}}>
 				<div style={{ display: 'flex', justifyContent: 'flex-end', gap: '20px' }}>
+					{shouldShowCancelButton && <Button label={'Cancel'} backgroundColor={background} color={fontColor} onClick={handleCancelClick} />}
 					{shouldShowBackBtn && <Button label={'Back'} backgroundColor={background} color={fontColor} onClick={handleBackClick} />}
 					<Button label={iframeData.primaryButtonLabel || 'Continue'} backgroundColor={background} color={fontColor} primary={true} onClick={handleContinueClick} disabled={!iframeData.enablePrimaryButton} />
 				</div>
