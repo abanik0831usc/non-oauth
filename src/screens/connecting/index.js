@@ -3,6 +3,8 @@ import styled from "styled-components";
 import {Link, useHistory, useLocation} from "react-router-dom";
 import {forwardMessageToMainAppFromPopup} from "../../utils/iframe";
 import './loader.css'
+import { DOC_RESP_TO_BASE64 } from 'constants'
+
 const Div = styled.div`
   padding: 0;
 `
@@ -57,7 +59,7 @@ function Connecting({url, shouldShowMFA, shouldShowError, handleErrorChange, han
         }, url)
       } else if(shouldEnableResponse) {
         forwardMessageToMainAppFromPopup({
-          response: "ewogdG9rZW46ICdhYmNkJywKIHBhc3N3b3JkOiAnYWJjZCcKfQ==",
+          response: DOC_RESP_TO_BASE64,
           currentScreen: 'connecting',
         }, url)
       }

@@ -117,7 +117,7 @@ function AuthScreen({url, iframeScreenStackSize, navigateProps, isAggregatorScre
                       <Checkmark className="checkmark" height="20px" width="20px"/>
                   </ContainerLabel>
 
-                  <ContainerLabel theme={background} fontSize="12px" left="5px" top="1px">Enable String response
+                  <ContainerLabel theme={background} fontSize="12px" left="5px" top="1px">Enable JSON response
                       <ContainerInput theme={background} type="checkbox" onChange={handleResponseChange} checked={shouldEnableResponse} />
                       <Checkmark className="checkmark" height="20px" width="20px" />
                   </ContainerLabel>
