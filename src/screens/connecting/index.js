@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {Link, useHistory, useLocation} from "react-router-dom";
 import {forwardMessageToMainAppFromPopup} from "../../utils/iframe";
 import './loader.css'
-import { DOC_RESP_TO_BASE64 } from 'constants'
+import { DOC_RESP_TO_BASE64 } from '../../constants'
 
 const Div = styled.div`
   padding: 0;
