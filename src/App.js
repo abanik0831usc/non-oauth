@@ -85,7 +85,7 @@ function App() {
 
   const [isErrorEnabled, setIsErrorEnabled] = useState(false)
   const [isMFAEnabled, setIsMFAEnabled] = useState(false)
-  const [isStringResponseToSend, setIsStringResponseToSend] = useState(false)
+  const [isJSONResponseToSend, setIsJSONResponseToSend] = useState(false)
   const [isCancelButtonEnabled, setIsCancelButtonEnabled] = useState(false)
 
   const handleErrorChange = () => {
@@ -97,7 +97,7 @@ function App() {
   }
 
   const handleResponseChange = () => {
-    setIsStringResponseToSend(prevState => !prevState)
+    setIsJSONResponseToSend(prevState => !prevState)
   }
 
   const handleCancelButton = () => {
@@ -118,7 +118,7 @@ function App() {
               <MFA shouldDisplayIntuitFooter={shouldDisplayIntuitFooter} iframeScreenStackSize={iframeScreenStackSize} navigateProps={navigateProps} theme={theme} background={background} fontColor={fontColor} url={originUrl} />
             </Route>
             <Route path="/connecting">
-              <Connecting shouldDisplayIntuitFooter={shouldDisplayIntuitFooter} iframeScreenStackSize={iframeScreenStackSize} navigateProps={navigateProps} theme={theme} handleMFAChange={handleMFAChange} handleErrorChange={handleErrorChange} shouldShowMFA={isMFAEnabled} shouldShowError={isErrorEnabled} url={originUrl} handleResponseChange={handleResponseChange} shouldEnableResponse={isStringResponseToSend} shouldShowCancelButton={isCancelButtonEnabled} handleCancelButton={handleCancelButton}/>
+              <Connecting shouldDisplayIntuitFooter={shouldDisplayIntuitFooter} iframeScreenStackSize={iframeScreenStackSize} navigateProps={navigateProps} theme={theme} handleMFAChange={handleMFAChange} handleErrorChange={handleErrorChange} shouldShowMFA={isMFAEnabled} shouldShowError={isErrorEnabled} url={originUrl} handleResponseChange={handleResponseChange} shouldEnableResponse={isJSONResponseToSend} shouldShowCancelButton={isCancelButtonEnabled} handleCancelButton={handleCancelButton}/>
             </Route>
             <Route path="/success">
               <Success shouldDisplayIntuitFooter={shouldDisplayIntuitFooter} iframeScreenStackSize={iframeScreenStackSize} navigateProps={navigateProps} background={background} theme={theme} fontColor={fontColor} url={originUrl} />
@@ -127,7 +127,7 @@ function App() {
               <Error shouldDisplayIntuitFooter={shouldDisplayIntuitFooter} iframeScreenStackSize={iframeScreenStackSize} isAggregatorScreenFirstInWidgets={isAggregatorScreenFirstInWidgets} theme={theme} navigateProps={navigateProps} background={background} fontColor={fontColor}url={originUrl} />
             </Route>
             <Route path="/">
-              <AuthScreen shouldDisplayIntuitFooter={shouldDisplayIntuitFooter} iframeScreenStackSize={iframeScreenStackSize} isAggregatorScreenFirstInWidgets={isAggregatorScreenFirstInWidgets} theme={theme} navigateProps={navigateProps} handleMFAChange={handleMFAChange} handleErrorChange={handleErrorChange} shouldShowMFA={isMFAEnabled} shouldShowError={isErrorEnabled} url={originUrl} background={background} fontColor={fontColor} handleResponseChange={handleResponseChange} shouldEnableResponse={isStringResponseToSend}  shouldShowCancelButton={isCancelButtonEnabled} handleCancelButton={handleCancelButton}/>
+              <AuthScreen shouldDisplayIntuitFooter={shouldDisplayIntuitFooter} iframeScreenStackSize={iframeScreenStackSize} isAggregatorScreenFirstInWidgets={isAggregatorScreenFirstInWidgets} theme={theme} navigateProps={navigateProps} handleMFAChange={handleMFAChange} handleErrorChange={handleErrorChange} shouldShowMFA={isMFAEnabled} shouldShowError={isErrorEnabled} url={originUrl} background={background} fontColor={fontColor} handleResponseChange={handleResponseChange} shouldEnableResponse={isJSONResponseToSend}  shouldShowCancelButton={isCancelButtonEnabled} handleCancelButton={handleCancelButton}/>
             </Route>
           </Switch>
         </div>
